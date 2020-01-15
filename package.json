@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "app-root-path": "^3.0.0",
+    "bcrypt": "^3.0.7",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "fs-extra": "^8.1.0",

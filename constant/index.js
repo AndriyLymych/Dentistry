@@ -4,3 +4,4 @@ module.exports.DB_TABLE_NAME = require('./dbTableName.enam');
 module.exports.GENDER = require('./gender.enam');
 module.exports.USER_SPECIALITY = require('./userSpeciality.enam');
 module.exports.PHOTO_PARAMS = require('./photoParams.constant');
+module.exports.ResponseStatusCodesEnum = require('./response-status-code.unum');

@@ -1,1 +1,1 @@
-module.exports.photoMidleware = require('./photoMiddleware');
+module.exports.photoMiddleware = require('./photoMiddleware');
