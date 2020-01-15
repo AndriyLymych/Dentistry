@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     req.photos = [];
 
     if (!req.files) {
-        next()
+        return next()
     }
 
     const files = Object.values(req.files);
@@ -29,5 +29,4 @@ module.exports = (req, res, next) => {
         }
     }
     next()
-
 }
