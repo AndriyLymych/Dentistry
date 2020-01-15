@@ -1,13 +1,13 @@
 const {USER_ROLE,USER_STATUS,GENDER} =require('../../constant');
 const {userService} =require('../../services');
-const {passwordHasher} =require('../../helpers');
+// const {passwordHasher} =require('../../helpers');
 
 module.exports = async (req, res) => {
     try {
 
         const patient = req.body;
 
-        patient.password = await passwordHasher(patient.password);
+        // patient.password = await passwordHasher(patient.password);
         patient.role_id = USER_ROLE.PATIENT;
         patient.status_id = USER_STATUS.ACTIVE;
         patient.gender_id = GENDER.MALE;
