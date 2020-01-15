@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
     try {
         const patient = req.body;
         const [photo] = req.photos;
+
         const appRoot = global.appRoot;
 
         // patient.password = await passwordHasher(patient.password);
@@ -18,6 +19,7 @@ module.exports = async (req, res) => {
         patient.gender_id = GENDER.MALE;
 
         const {id} = await userService.createPatient(patient);
+
 
         const avatarDir = `user/${id}/avatar`;
         const avatarExt = photo.name.split('.').pop();

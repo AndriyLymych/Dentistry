@@ -3,6 +3,8 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 
 const db = require('./dataBase').getInstance().setModels();
+fileUploader({});
+
 const {UserRouter} = require('./router');
 
 const app = express();
@@ -11,7 +13,6 @@ app.use(express.json());
 
 app.use(express.static(resolve(__dirname,'public')));
 global.appRoot = __dirname;
-fileUploader({});
 
 app.use('/users', UserRouter);
 
