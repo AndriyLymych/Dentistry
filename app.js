@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.use(express.static(resolve(__dirname,'public')));
 global.appRoot = __dirname;
+fileUploader({});
 
 app.use('/users', UserRouter);
 

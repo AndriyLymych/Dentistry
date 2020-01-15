@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
     try {
 
         const patient = req.body;
+        const file =  req.files;
+
 
         // patient.password = await passwordHasher(patient.password);
         patient.role_id = USER_ROLE.PATIENT;

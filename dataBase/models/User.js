@@ -41,6 +41,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             required: true
         },
+        avatar: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.fn('now')
+        },
         role_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
