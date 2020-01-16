@@ -9,9 +9,9 @@ const {userService} = require('../../services');
 module.exports = async (req, res) => {
     try {
         const patient = req.body;
-        const [photo] = req.photos;
-
-        const appRoot = global.appRoot;
+        // const [photo] = req.photos;
+        //
+        // const appRoot = global.appRoot;
 
         // patient.password = await passwordHasher(patient.password);
         patient.role_id = USER_ROLE.PATIENT;
@@ -21,15 +21,16 @@ module.exports = async (req, res) => {
         const {id} = await userService.createPatient(patient);
 
 
-        const avatarDir = `user/${id}/avatar`;
-        const avatarExt = photo.name.split('.').pop();
-        const avatarName = `${uuid}.${avatarExt}`;
-
-        await fsExtra.mkdirSync(resolve(appRoot,'public',avatarDir),{recursive:true});
-        await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
-        await userService.updateUserByParams({avatar: avatarDir},{id});
+        // const avatarDir = `user/${id}/avatar`;
+        // const avatarExt = photo.name.split('.').pop();
+        // const avatarName = `${uuid}.${avatarExt}`;
+        //
+        // await fsExtra.mkdirSync(resolve(appRoot,'public',avatarDir),{recursive:true});
+        // await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
+        // await userService.updateUserByParams({avatar: avatarDir},{id});
 
         res.status(201).end();
+
 
     } catch (e) {
         res
