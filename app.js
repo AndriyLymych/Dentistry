@@ -3,7 +3,7 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 
 require('./dataBase').getInstance().setModels();
-const {UserRouter, AuthRouter} = require('./router');
+const {PatientRouter,DoctorRouter, AuthRouter} = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant')
 const config = require('./config/config');
 
@@ -15,7 +15,8 @@ app.use(express.static(resolve(__dirname, 'public')));
 global.appRoot = __dirname;
 fileUploader({});
 
-app.use('/users', UserRouter);
+app.use('/patients', PatientRouter);
+app.use('/doctors',DoctorRouter);
 app.use('/auth', AuthRouter);
 
 app.use((err, req, res, next) => {

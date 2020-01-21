@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
             throw new CustomError('User is blocked', 403, 'authUser')
 
         }
-
+        //TODO hashed password check
         const tokens = tokenCreator();
 
         await oauthService.insertTokens({
