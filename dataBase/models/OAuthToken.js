@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const User = sequelize.import('./User');
 
-    OAuthToken.belongsTo(User, {foreignKey: 'id_user'});
+    OAuthToken.belongsTo(User, {foreignKey: 'user_id'});
 
     return OAuthToken;
 

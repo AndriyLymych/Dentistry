@@ -1,4 +1,4 @@
-const {userService} = require('../../services');
+const {userService, oauthService} = require('../../services');
 const {USER_STATUS, USER_ROLE} = require('../../constant');
 const {tokenCreator} = require('../../helpers');
 const CustomError = require('../../error/CustomError');
@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
         const userPresent = await userService.getUserByParams({
             email,
             role_id: USER_ROLE.PATIENT || USER_ROLE.DOCTOR
-
         });
 
         if (!userPresent) {
@@ -22,6 +21,11 @@ module.exports = async (req, res) => {
         }
 
         const tokens = tokenCreator();
+
+        await oauthService.insertTokens({
+            user_id: userPresent.id,
+            ...tokens
+        });
 
         res.json(tokens)
     } catch (e) {

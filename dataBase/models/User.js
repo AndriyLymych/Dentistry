@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsTo(UserRole, {foreignKey: 'role_id'});
     User.belongsTo(UserSpeciality, {foreignKey: 'speciality_id'})
     User.belongsTo(UserStatus, {foreignKey: 'status_id'});
-    User.belongsTo(Gender, {foreignKey: 'gender_id'})
+    User.belongsTo(Gender, {foreignKey: 'gender_id'});
 
     return User
 

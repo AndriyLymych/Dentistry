@@ -1,0 +1,1 @@
+module.exports.getUserFromTokensByParams = require('./getUserFromTokensByParams.service')
