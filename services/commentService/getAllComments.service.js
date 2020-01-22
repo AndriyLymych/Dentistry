@@ -7,4 +7,5 @@ module.exports = async () => {
     const comments = await CommentModel.findAll({raw: true});
 
     return comments
+
 }
