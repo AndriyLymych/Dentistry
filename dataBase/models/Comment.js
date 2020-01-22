@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        commentText: {
+            type:DataTypes.TEXT,
+            allowNull:false
+        },
         created_at: {
             type: DataTypes.DATE,
             defaultValue: sequelize.fn('now')
