@@ -3,7 +3,7 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 
 require('./dataBase').getInstance().setModels();
-const {PatientRouter,DoctorRouter, AuthRouter} = require('./router');
+const {PatientRouter,DoctorRouter, AuthRouter,CommentRouter} = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant');
 const config = require('./config/configs');
 
@@ -18,8 +18,9 @@ fileUploader({});
 app.use('/patients', PatientRouter);
 app.use('/doctors',DoctorRouter);
 app.use('/auth', AuthRouter);
+app.use('/comments',CommentRouter);
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     res
         .status(err.status || ResponseStatusCodesEnum.SERVER_ERROR)
         .json({

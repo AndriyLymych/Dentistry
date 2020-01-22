@@ -1,5 +1,5 @@
 const {verifyAccessToken} = require('../../helpers');
-const {CustomError} = require('../../error/CustomError');
+const CustomError = require('../../error/CustomError');
 const {ResponseStatusCodes} = require('../../constant');
 
 module.exports = async (req, res, next) => {
@@ -14,4 +14,4 @@ module.exports = async (req, res, next) => {
 
     next()
 
-}
+};
