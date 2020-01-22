@@ -1,6 +1,8 @@
 const {commentController} = require('../../controllers');
 const {authMiddleware} = require('../../middlewares');
 
+
+
 const router = require('express').Router();
 
 router.get('/', commentController.getAllComments);
