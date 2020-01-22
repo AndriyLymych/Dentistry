@@ -221,7 +221,7 @@ module.exports = {
         }
     },
 
-    down: async (queryInterface) => {
+    down: async (queryInterface, Sequelize) => {
 
         await queryInterface.dropTable('comment');
         await queryInterface.dropTable('oauth_token');
