@@ -1,9 +1,7 @@
+const router = require('express').Router();
+
 const {commentController} = require('../../controllers');
 const {authMiddleware} = require('../../middlewares');
-
-
-
-const router = require('express').Router();
 
 router.get('/', commentController.getAllComments);
 router.post(
@@ -13,7 +11,6 @@ router.post(
     commentController.postComment
 );
 
-// router.use('/',)
 // router.put('/',commentController.editComment);
 // router.delete('/',commentController.deleteComment);
 
