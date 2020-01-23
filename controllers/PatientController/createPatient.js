@@ -1,7 +1,5 @@
-const {resolve} = require('path');
-const uuid = require('uuid').v1();
+
 const Joi = require('joi');
-const fsExtra = require('fs-extra');
 
 const {USER_ROLE, USER_STATUS,ResponseStatusCodes} = require('../../constant');
 const {userService} = require('../../services');
@@ -12,9 +10,6 @@ const CustomError = require('../../error/CustomError');
 module.exports = async (req, res) => {
     try {
         const patient = req.body;
-        // const [photo] = req.photos;
-        //
-        // const appRoot = global.appRoot;
 
         patient.role_id = USER_ROLE.PATIENT;
         patient.status_id = USER_STATUS.ACTIVE;
@@ -26,17 +21,11 @@ module.exports = async (req, res) => {
 
         // patient.password = await passwordHasher(patient.password);
 
-        const {id} = await userService.createUser(patient);
+        const newPatient= await userService.createUser(patient);
 
-        // const avatarDir = `user/${id}/avatar`;
-        // const avatarExt = photo.name.split('.').pop();
-        // const avatarName = `${uuid}.${avatarExt}`;
-        //
-        // await fsExtra.mkdirSync(resolve(appRoot,'public',avatarDir),{recursive:true});
-        // await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
-        // await userService.updateUserByParams({avatar: avatarDir},{id});
 
         res.status(ResponseStatusCodes.CREATED).end();
+
     } catch (e) {
         res
             .status(e.status)

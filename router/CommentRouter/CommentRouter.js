@@ -1,9 +1,11 @@
 const router = require('express').Router();
 
 const {commentController} = require('../../controllers');
-const {authMiddleware} = require('../../middlewares');
+const {authMiddleware, commentMiddleware} = require('../../middlewares');
 
 router.get('/', commentController.getAllComments);
+router.get('/:id', commentController.getCommentById);
+
 router.post(
     '/',
     authMiddleware.accessTokenChecker,
@@ -11,7 +13,9 @@ router.post(
     commentController.postComment
 );
 
-router.put('/:id',authMiddleware.accessTokenChecker, authMiddleware.getUserFromAccessToken, commentController.editComment);
-// router.delete('/',commentController.deleteComment);
+router.use('/:id', authMiddleware.accessTokenChecker, authMiddleware.getUserFromAccessToken, commentMiddleware.commentPresent);
+
+router.put('/:id', commentController.editComment);
+router.delete('/:id', commentController.deleteComment);
 
 module.exports = router;

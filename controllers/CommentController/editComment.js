@@ -1,26 +1,25 @@
+const Joi = require('joi');
+
 const {ResponseStatusCodes} = require('../../constant');
 const {commentService} = require('../../services');
+const {commentValidator} =require('../../validators');
 const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
     try {
         const {id} = req.params;
-        const {user_id} = req.user;
-        const comment = await commentService.getCommentById(id);
-
         const newComment = req.body;
 
-        if (!comment) throw new CustomError('Such comment is not found', ResponseStatusCodes.FORBIDDEN, 'editComment');
+        const editedComment = Joi.validate(newComment,commentValidator);
 
-        if (comment.user_id !== user_id) {
-            throw new CustomError('You can not edit this comment', ResponseStatusCodes.FORBIDDEN, 'editComment');
-
+        if (editedComment.error) {
+            throw new CustomError(editedComment.error.details[0].message, 400, 'postComment');
         }
 
-
         await commentService.updateComment(newComment, id);
+        const comments = await commentService.getAllComments();
 
-        res.status(200).end();
+        res.status(ResponseStatusCodes.CREATED).json(comments);
 
     } catch (e) {
         res
