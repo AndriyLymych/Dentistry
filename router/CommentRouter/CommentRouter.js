@@ -11,7 +11,7 @@ router.post(
     commentController.postComment
 );
 
-// router.put('/',commentController.editComment);
+router.put('/:id',authMiddleware.accessTokenChecker, authMiddleware.getUserFromAccessToken, commentController.editComment);
 // router.delete('/',commentController.deleteComment);
 
 module.exports = router;
