@@ -8,7 +8,9 @@ module.exports = async (req, res, next) => {
     const userFromToken = await authService.getUserFromTokensByParams({access_token: token});
 
     if (!userFromToken) {
-        return next(new CustomError('User is not present', ResponseStatusCodes.NOT_FOUND))
+        return next(
+            new CustomError('User is not present', ResponseStatusCodes.NOT_FOUND, 'getUserFromAccessToken.middleware')
+        )
     }
 
     req.user = userFromToken;

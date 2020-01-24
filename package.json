@@ -24,7 +24,7 @@
     "node": "^13.6.0",
     "nodemon": "^2.0.2",
     "sequelize": "^5.21.3",
-    "uuid": "latest"
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

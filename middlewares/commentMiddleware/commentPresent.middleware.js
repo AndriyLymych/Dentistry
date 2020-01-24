@@ -11,12 +11,16 @@ module.exports = async (req, res, next) => {
 
     if (!comment) {
 
-        return next(new CustomError('Such comment is not found', ResponseStatusCodes.FORBIDDEN, 'commentPresent.middleware'));
+        return next(
+            new CustomError('Such comment is not found', ResponseStatusCodes.FORBIDDEN, 'commentPresent.middleware')
+        );
     }
 
     if (comment.user_id !== user_id) {
 
-        return next(new CustomError('You can not edit this comment', ResponseStatusCodes.FORBIDDEN, 'commentPresent.middleware'));
+        return next(
+            new CustomError('You can not edit this comment', ResponseStatusCodes.FORBIDDEN, 'commentPresent.middleware')
+        );
 
     }
     next()

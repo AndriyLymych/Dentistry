@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-    up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
 
-        await queryInterface.sequelize.query(
-            `INSERT INTO user(
+    await queryInterface.sequelize.query(
+        `INSERT INTO user(
                     email,
                     password, 
                     name, 
@@ -28,17 +28,19 @@ module.exports = {
                     1,
                     1
                  )`
-        );
+    );
 
-    },
 
-    down: (queryInterface, Sequelize) => {
-        /*
-          Add reverting commands here.
-          Return a promise to correctly handle asynchronicity.
 
-          Example:
-          return queryInterface.dropTable('users');
-        */
-    }
+  },
+
+  down: (queryInterface, Sequelize) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.dropTable('users');
+    */
+  }
 };

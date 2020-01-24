@@ -3,6 +3,33 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
+            const medicalService = {
+                id: {
+                    type: Sequelize.INTEGER,
+                    primaryKey: true,
+                    autoIncrement: true
+                },
+                service: {
+                    type: Sequelize.STRING,
+                    allowNull: false,
+                    required: true
+                },
+                photo: {
+                    type: Sequelize.STRING,
+                    allowNull: true
+                },
+                description: {
+                    type: Sequelize.STRING,
+                    allowNull: false
+                },
+                price: {
+                    type: Sequelize.INTEGER,
+                    allowNull: false
+                }
+            };
+
+            await queryInterface.createTable('medical_service', medicalService);
+
             const gender = {
                 id: {
                     type: Sequelize.INTEGER,
@@ -16,7 +43,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable("gender", gender);
+            await queryInterface.createTable('gender', gender);
 
             const userRole = {
                 id: {
@@ -230,6 +257,7 @@ module.exports = {
         await queryInterface.dropTable('user_role');
         await queryInterface.dropTable('user_speciality');
         await queryInterface.dropTable('gender');
+        await queryInterface.dropTable('medical_service')
 
     }
 }

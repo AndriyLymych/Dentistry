@@ -1,4 +1,3 @@
-
 const Joi = require('joi');
 
 const {USER_ROLE, USER_STATUS,ResponseStatusCodes} = require('../../constant');
@@ -15,6 +14,7 @@ module.exports = async (req, res) => {
         patient.status_id = USER_STATUS.ACTIVE;
 
         const validatedPatient = Joi.validate(patient, userValidator);
+
         if (validatedPatient.error) {
             throw new CustomError(validatedPatient.error.details[0].message, 400, 'Create Patient');
         }
