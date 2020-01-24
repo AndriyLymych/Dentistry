@@ -1,15 +1,17 @@
 const router = require('express').Router();
 
-const {authController} = require('../../controllers');
+const {authController,adminController} = require('../../controllers');
 const {authMiddleware} = require('../../middlewares');
 
-router.post('/safhaasfasdfajk_auth_admin', authController.authAdmin);
-// router.post('/logout', authMiddleware.accessTokenChecker, authController.logoutUser);
-// router.post(
-//     '/refresh',
-//     authMiddleware.refreshTokenChecker,
-//     authMiddleware.getUserFromRefreshToken,
-//     authController.refreshToken
-// );
+// router.post('/',adminController);
+router.post('/auth', authController.authAdmin);
+router.post('/auth/logout', authMiddleware.accessTokenChecker, authController.logoutUser);
+router.post(
+    '/auth/refresh',
+    authMiddleware.refreshTokenChecker,
+    authMiddleware.getUserFromRefreshToken,
+    authController.refreshToken
+);
+
 
 module.exports = router;
