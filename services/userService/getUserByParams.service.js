@@ -7,6 +7,5 @@ module.exports = async object => {
     const user = await UserModel.findOne({
         where: object
     });
-
     return user && user.dataValues
 }

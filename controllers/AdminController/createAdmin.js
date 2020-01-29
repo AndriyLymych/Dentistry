@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const {USER_ROLE, USER_STATUS,ResponseStatusCodes} = require('../../constant');
+const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
 const {userService} = require('../../services');
 const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
@@ -16,15 +16,12 @@ module.exports = async (req, res) => {
         const validatedAdmin = Joi.validate(admin, userValidator);
 
         if (validatedAdmin.error) {
-            throw new CustomError(validatedAdmin.error.details[0].message, 400, 'Create Patient');
+            throw new CustomError(validatedAdmin.error.details[0].message, ResponseStatusCodes.BAD_REQUEST, 'Create Patient');
         }
 
-        //TODO hash password and add photo
+        admin.password = await passwordHasher(admin.password);
 
-        // patient.password = await passwordHasher(patient.password);
-
-        const newPatient= await userService.createUser(admin);
-
+        await userService.createUser(admin);
 
         res.status(ResponseStatusCodes.CREATED).end();
 

@@ -19,9 +19,9 @@ module.exports = async (req, res) => {
             throw new CustomError(validatedPatient.error.details[0].message, 400, 'Create Patient');
         }
 
-        //TODO hash password and add photo
+        //TODO add photo
 
-        // patient.password = await passwordHasher(patient.password);
+        patient.password = await passwordHasher(patient.password);
 
         const newPatient= await userService.createUser(patient);
 

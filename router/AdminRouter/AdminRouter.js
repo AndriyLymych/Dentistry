@@ -1,9 +1,13 @@
 const router = require('express').Router();
 
-const {authController,adminController} = require('../../controllers');
+const {authController, adminController} = require('../../controllers');
 const {authMiddleware} = require('../../middlewares');
 
-// router.post('/',adminController);
+router.post(
+    '/', authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    adminController.createAdmin
+);
 router.post('/auth', authController.authAdmin);
 router.post('/auth/logout', authMiddleware.accessTokenChecker, authController.logoutUser);
 router.post(

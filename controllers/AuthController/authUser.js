@@ -1,6 +1,6 @@
 const {userService, oauthService} = require('../../services');
-const {USER_STATUS, USER_ROLE} = require('../../constant');
-const {tokenCreator} = require('../../helpers');
+const {USER_STATUS, USER_ROLE, ResponseStatusCodes} = require('../../constant');
+const {tokenCreator, passwordChecker} = require('../../helpers');
 const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
@@ -8,18 +8,23 @@ module.exports = async (req, res) => {
         const {email, password} = req.body;
 
         const userPresent = await userService.getUserByParams({
-            email,
-            role_id: USER_ROLE.PATIENT || USER_ROLE.DOCTOR
+            email
         });
 
-        if (!userPresent) {
-            throw new CustomError('Such user is not register', 403, 'authUser')
+        if (userPresent.role_id !== USER_ROLE.PATIENT && userPresent.role_id !== USER_ROLE.DOCTOR) {
+            throw new CustomError('Such user is not register', ResponseStatusCodes.NOT_FOUND, 'authUser')
         }
+
+        if (!userPresent) {
+            throw new CustomError('Such user is not register', ResponseStatusCodes.NOT_FOUND, 'authUser')
+        }
+
         if (userPresent.status_id === USER_STATUS.BLOCKED) {
-            throw new CustomError('User is blocked', 403, 'authUser')
+            throw new CustomError('User is blocked', ResponseStatusCodes.FORBIDDEN, 'authUser')
 
         }
-        //TODO hashed password check
+        await passwordChecker(userPresent.password, password);
+
         const tokens = tokenCreator();
 
         await oauthService.insertTokens({
