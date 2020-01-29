@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {authController, adminController} = require('../../controllers');
-const {authMiddleware} = require('../../middlewares');
+const {authMiddleware, userMiddleware} = require('../../middlewares');
 
 router.post(
     '/', authMiddleware.accessTokenChecker,
@@ -17,5 +17,8 @@ router.post(
     authController.refreshToken
 );
 
+router.use('/users/:user_id', userMiddleware.userPresent);
+router.put('users/:user_id/block', adminController.blockUser);
+router.put('users/:user_id/block', adminController.unblockUser);
 
 module.exports = router;
