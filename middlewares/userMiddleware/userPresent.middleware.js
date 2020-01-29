@@ -13,5 +13,7 @@ module.exports = async (req, res, next) => {
         )
     }
 
-    req.user = user
+    req.user = user;
+
+    next()
 }
