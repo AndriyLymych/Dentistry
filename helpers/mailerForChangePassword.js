@@ -11,25 +11,24 @@ module.exports = async (user) => {
             pass: EMAIL_DATES.PASSWORD
         }
 
-    }, {
-        from: EMAIL_DATES.EMAIL
     });
 
-    await transport.sendMail({
-        to: 't1one2000@ukr.net',
+    const info = await transport.sendMail({
+        from: EMAIL_DATES.EMAIL,
+        to: user,
         subject: 'Change password on dentistry',
-        text: 'hello'
+        html: template()
+    });
+    return info
+}
 
-    })
-
-    function template() {
-        const token = tokenCreatorForChangePassword();
-        const msg =
-            `<h1> Password change </h1>
-         <br>
-         <p>You want to change your password. Click on this link please:</p>
-         <a href="http://localhost:3000/auth/users/password?t=${token}"></a>
-         `;
-        return msg;
-    }
+function template() {
+    const token = tokenCreatorForChangePassword();
+    const msg =
+        `<h1> Password change </h1>
+            <br>
+            <p>You want to change your password. Click on this link please:</p>
+             <a href="http://localhost:3000/auth/users/password?t=${token}"></a>
+            `;
+    return msg;
 }
