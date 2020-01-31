@@ -27,6 +27,8 @@ router.use(
 
 router.put('/users/:id/block', adminController.blockUser);
 
- router.put('/users/:id/unblock', adminController.unblockUser);
+router.put('/users/:id/unblock', adminController.unblockUser);
+
+
 
 module.exports = router;
