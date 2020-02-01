@@ -1,5 +1,7 @@
 'use strict';
 
+// TODO dataBase table unification. created_at and middleName. Use some_text or someText; Not both!
+// TODO replace database table names to constants !
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
@@ -260,5 +262,4 @@ module.exports = {
         await queryInterface.dropTable('medical_service')
 
     }
-}
-;
+};

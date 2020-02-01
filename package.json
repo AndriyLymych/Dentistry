@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "first": "node_modules/.bin/sequelize db:create && npx sequelize-cli db:migrate",
+    "create:db": "sequelize db:create",
     "migrate:up": "npx sequelize-cli db:migrate",
     "migrate:down": "npx sequelize-cli db:migrate:undo"
   },
@@ -35,6 +36,7 @@
     "@types/node": "^13.1.7",
     "@types/sequelize": "^3.0.0",
     "sequelize-cli": "^5.5.1",
+    "@types/bcrypt": "^3.0.0",
     "@types/nodemailer": "^6.4.0"
   }
 }

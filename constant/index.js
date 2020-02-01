@@ -6,7 +6,6 @@ module.exports.USER_SPECIALITY = require('./userSpeciality.enam');
 module.exports.PHOTO_PARAMS = require('./photoParams.constant');
 module.exports.ResponseStatusCodes = require('./response-status-code.unum');
 module.exports.noCopyRegex = require('./noCopyRegex.validate');
-module.exports.JWT_SECRET = require('./JWT_SECRET');
 module.exports.EMAIL_DATES = require('./emailDates');
 
 

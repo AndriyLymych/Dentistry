@@ -3,7 +3,7 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 
 require('./dataBase').getInstance().setModels();
-const {PatientRouter,DoctorRouter, AuthRouter,CommentRouter,AdminRouter} = require('./router');
+const {PatientRouter, DoctorRouter, AuthRouter, CommentRouter, AdminRouter} = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant');
 const config = require('./config/configs');
 
@@ -16,26 +16,26 @@ global.appRoot = __dirname;
 fileUploader({});
 
 app.use('/patients', PatientRouter);
-app.use('/doctors',DoctorRouter);
+app.use('/doctors', DoctorRouter);
 app.use('/auth', AuthRouter);
-app.use('/comments',CommentRouter);
-app.use('/admin',AdminRouter);
+app.use('/comments', CommentRouter);
+app.use('/admin', AdminRouter);
 
 
 app.use((err, req, res, next) => {
-    res
-        .status(err.status || ResponseStatusCodesEnum.SERVER_ERROR)
-        .json({
-            error: {
-                message: err.message || 'Unknown Error',
-                code: err.code,
-                data: err.data
-            }
-        });
+  res
+    .status(err.status || ResponseStatusCodesEnum.SERVER_ERROR)
+    .json({
+      error: {
+        message: err.message || 'Unknown Error',
+        code: err.code,
+        data: err.data
+      }
+    });
 });
 
 app.listen(config.PORT, (err) => {
-    if (err) console.log(err);
+  if (err) console.log(err);
 
-    console.log(`listening port ${config.PORT}...`);
+  console.log(`listening port ${config.PORT}...`);
 });
