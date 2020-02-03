@@ -18,4 +18,6 @@ router.post(
     authController.sendEmailForChangePassword
 );
 
+router.post('/password-refresh', authController.refreshPassword);
+
 module.exports = router;
