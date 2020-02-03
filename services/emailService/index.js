@@ -1,0 +1,1 @@
+module.exports.sendEmailForChangePassword = require('./sendEmailForChangePassword.service')

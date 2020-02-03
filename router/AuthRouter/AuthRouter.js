@@ -11,12 +11,7 @@ router.post(
     authMiddleware.getUserFromRefreshToken,
     authController.refreshToken
 );
-router.post(
-    '/users/password',
-    authMiddleware.accessTokenChecker,
-    authMiddleware.getUserFromAccessToken,
-    authController.sendEmailForChangePassword
-);
+
 
 router.post('/password-refresh', authController.refreshPassword);
 
