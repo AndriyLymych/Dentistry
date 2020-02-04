@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
-const {userService} = require('../../services');
+const {userService, emailService} = require('../../services');
 const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
@@ -22,6 +22,8 @@ module.exports = async (req, res) => {
         admin.password = await passwordHasher(admin.password);
 
         await userService.createUser(admin);
+
+        await emailService.sendEmailForRegister(admin.email,admin.name,admin.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 

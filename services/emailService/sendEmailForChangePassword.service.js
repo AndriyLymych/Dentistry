@@ -4,9 +4,10 @@ const {EMAIL_DATES} = require('../../constant');
 const {tokenCreatorForChangePassword} = require('../../helpers');
 
 //TODO REPLACE EMAIL SENDER TO SERVICE!!!
-module.exports = async () => { // TODO user not used!
+module.exports = async (email) => {
+
     const transport = mailer.createTransport({
-        service: 'Gmail',
+        service: 'gmail',
         auth: {
             user: EMAIL_DATES.EMAIL,
             pass: EMAIL_DATES.PASSWORD
@@ -14,18 +15,21 @@ module.exports = async () => { // TODO user not used!
     });
 
     await transport.sendMail({
-        from: EMAIL_DATES.EMAIL,
-        to: 't1one2000@ukr.net', // TODO SEND Email to real user email. NO MAGIC STRINGS
+        from: `DENTISTRY👻 ${EMAIL_DATES.EMAIL}`,
+        to: email,
         subject: 'Change password on dentistry',
         html: template()
     });
 
-    function template() {
-        const token = tokenCreatorForChangePassword();
-        return `<h1> Password change </h1>
+
+};
+
+function template() {
+    const {token_for_change_password} = tokenCreatorForChangePassword();
+
+    return  `<h1> Password change </h1>
          <br>
          <p>You want to change your password. Click on this link please:</p>
-         <a href="http://localhost:3000/auth/password-refresh?t=${token}"> LINK </a>
+         <a href="http://localhost:3000/auth/password-refresh?t=${token_for_change_password}" methods="post"> LINK </a>
          `;
-    }
-};
+}

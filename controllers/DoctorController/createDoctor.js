@@ -5,7 +5,7 @@ const Joi = require('joi');
 
 
 const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
-const {userService} = require('../../services');
+const {userService, emailService} = require('../../services');
 const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
         // await fsExtra.mkdirSync(resolve(appRoot,'public',avatarDir),{recursive:true});
         // await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
         // await userService.updateUserByParams({avatar: avatarDir},{id});
+        await emailService.sendEmailForRegister(doctor.email,doctor.name,doctor.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
     } catch (e) {

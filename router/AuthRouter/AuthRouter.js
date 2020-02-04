@@ -13,6 +13,11 @@ router.post(
 );
 
 
-router.post('/password-refresh', authController.refreshPassword);
+router.post(
+    '/password-refresh',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getUserFromAccessToken,
+    authController.refreshPassword
+);
 
 module.exports = router;
