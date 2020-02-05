@@ -6,4 +6,4 @@ module.exports = {
     USER_SPECIALITY: 'UserSpeciality',
     USER_STATUS: 'UserStatus',
     COMMENT: 'Comment'
-}
+};
