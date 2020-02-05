@@ -1,19 +1,23 @@
 const {userService} = require('../../services');
-const {emailService} = require('../../services');
 const CustomError = require('../../error/CustomError');
 const {ResponseStatusCodes} = require('../../constant');
 
 module.exports = async (req, res) => {
     try {
-        const {user_id: id} = req.user;
+        const {t: token} = req.query;
 
-        const userPresent = await userService.getUserById(id);
+        if (!token) {
 
-        if (!userPresent) {
-            throw new CustomError('User is not present', ResponseStatusCodes.NOT_FOUND, 'sendEmailForChangePassword');
         }
 
-        await emailService.sendEmailForChangePassword(userPresent.email);
+        const {newPassword, newPasswordAgain} = req.body;
+        const {user_id: id} = req.user;
+
+        if (newPassword !== newPasswordAgain) {
+            throw new CustomError('Passwords do not match',ResponseStatusCodes.FORBIDDEN,'changePassword')
+        }
+
+        await userService.updateUserByParams({password: newPassword}, id);
 
         res.status(ResponseStatusCodes.CREATED).end()
     } catch (e) {

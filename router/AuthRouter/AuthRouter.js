@@ -20,4 +20,11 @@ router.post(
     authController.refreshPassword
 );
 
+router.put(
+    '/password-refresh',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getUserFromAccessToken,
+    authController.changePassword
+);
+
 module.exports = router;

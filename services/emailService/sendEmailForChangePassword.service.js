@@ -3,7 +3,6 @@ const mailer = require('nodemailer');
 const {EMAIL_DATES} = require('../../constant');
 const {tokenCreatorForChangePassword} = require('../../helpers');
 
-//TODO REPLACE EMAIL SENDER TO SERVICE!!!
 module.exports = async (email) => {
 
     const transport = mailer.createTransport({
@@ -25,6 +24,7 @@ module.exports = async (email) => {
 };
 
 function template() {
+
     const {token_for_change_password} = tokenCreatorForChangePassword();
 
     return  `<h1> Password change </h1>

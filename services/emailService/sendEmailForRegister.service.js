@@ -2,8 +2,7 @@ const mailer = require('nodemailer');
 
 const {EMAIL_DATES} = require('../../constant');
 
-//TODO REPLACE EMAIL SENDER TO SERVICE!!!
-module.exports = async (email, name, middleName) => { // TODO user not used!
+module.exports = async (email, name, middleName) => {
 
     const transport = mailer.createTransport({
         service: 'Gmail',

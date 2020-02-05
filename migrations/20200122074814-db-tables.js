@@ -1,7 +1,8 @@
 'use strict';
-
+// const {DB_TABLE_NAME} =require('../constant');
 // TODO dataBase table unification. created_at and middleName. Use some_text or someText; Not both!
 // TODO replace database table names to constants !
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
