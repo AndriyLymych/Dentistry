@@ -8,6 +8,14 @@ router.post(
     authMiddleware.getAdminFromAccessToken,
     adminController.createAdmin
 );
+
+router.post(
+    '/services/add',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    adminController.addNewMedicalService
+);
+
 router.post('/auth', authController.authAdmin);
 
 router.post('/auth/logout', authMiddleware.accessTokenChecker, authController.logoutUser);
@@ -28,7 +36,6 @@ router.use(
 router.put('/users/:id/block', adminController.blockUser);
 
 router.put('/users/:id/unblock', adminController.unblockUser);
-
 
 
 module.exports = router;

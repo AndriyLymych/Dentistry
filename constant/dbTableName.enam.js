@@ -5,5 +5,6 @@ module.exports = {
     USER_ROLE: 'UserRole',
     USER_SPECIALITY: 'UserSpeciality',
     USER_STATUS: 'UserStatus',
-    COMMENT: 'Comment'
+    COMMENT: 'Comment',
+    MEDICAL_SERVICE : 'MedicalService'
 }
