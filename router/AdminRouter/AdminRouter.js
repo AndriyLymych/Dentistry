@@ -37,5 +37,11 @@ router.put('/users/:id/block', adminController.blockUser);
 
 router.put('/users/:id/unblock', adminController.unblockUser);
 
+router.delete(
+    '/services/delete/:id',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    adminController.deleteMedicalService
+);
 
 module.exports = router;
