@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
     try {
         const newService = req.body;
 
+
         await adminService.addMedicalService(newService);
 
         res.status(ResponseStatusCodes.CREATED).end();
