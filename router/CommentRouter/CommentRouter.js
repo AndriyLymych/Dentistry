@@ -13,7 +13,12 @@ router.post(
     commentController.postComment
 );
 
-router.use('/:id', authMiddleware.accessTokenChecker, authMiddleware.getUserFromAccessToken, commentMiddleware.commentPresent);
+router.use(
+    '/:id',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getUserFromAccessToken,
+    commentMiddleware.commentPresent
+);
 
 router.put('/:id', commentController.editComment);
 router.delete('/:id', commentController.deleteComment);

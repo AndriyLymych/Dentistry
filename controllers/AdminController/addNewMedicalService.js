@@ -1,12 +1,12 @@
 const {ResponseStatusCodes} = require('../../constant');
-const {adminService} = require('../../services');
+const {medicalFavourService} = require('../../services');
 
 module.exports = async (req, res) => {
     try {
         const newService = req.body;
 
 
-        await adminService.addMedicalService(newService);
+        await medicalFavourService.addMedicalService(newService);
 
         res.status(ResponseStatusCodes.CREATED).end();
 
