@@ -3,7 +3,7 @@ const {DB_TABLE_NAME} = require('../../constant');
 
 module.exports = async obj => {
     const UserModel = db.getModel(DB_TABLE_NAME.USER);
-    console.log(UserModel);
+
     const user = await UserModel.create(obj);
 
     return user && user.dataValues

@@ -6,7 +6,7 @@ const {tokenCreatorForChangePassword} = require('../../helpers');
 module.exports = async (email) => {
 
     const transport = mailer.createTransport({
-        service: 'gmail',
+        service: 'Gmail',
         auth: {
             user: EMAIL_DATES.EMAIL,
             pass: EMAIL_DATES.PASSWORD
@@ -27,7 +27,7 @@ function template() {
 
     const {token_for_change_password} = tokenCreatorForChangePassword();
 
-    return  `<h1> Password change </h1>
+    return `<h1> Password change </h1>
          <br>
          <p>You want to change your password. Click on this link please:</p>
          <a href="http://localhost:3000/auth/password-refresh?t=${token_for_change_password}" methods="post"> LINK </a>

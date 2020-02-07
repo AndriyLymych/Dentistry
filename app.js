@@ -3,7 +3,7 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 
 require('./dataBase').getInstance().setModels();
-const {PatientRouter, DoctorRouter, AuthRouter, CommentRouter, AdminRouter} = require('./router');
+const {PatientRouter, DoctorRouter, AuthRouter, CommentRouter, AdminRouter,MedicalServiceRouter} = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant');
 const config = require('./config/configs');
 
@@ -20,6 +20,7 @@ app.use('/doctors', DoctorRouter);
 app.use('/auth', AuthRouter);
 app.use('/comments', CommentRouter);
 app.use('/admin', AdminRouter);
+app.use('/services' , MedicalServiceRouter);
 
 
 app.use((err, req, res, next) => {

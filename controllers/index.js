@@ -3,6 +3,6 @@ module.exports.authController = require('./AuthController');
 module.exports.doctorController = require('./DoctorController');
 module.exports.commentController = require('./CommentController');
 module.exports.adminController = require('./AdminController');
-module.exports.adminController = require('./MedicalServiceController');
+module.exports.medicalServiceController = require('./MedicalServiceController');
 
 

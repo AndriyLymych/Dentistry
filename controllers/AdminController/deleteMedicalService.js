@@ -7,7 +7,9 @@ module.exports = async (req, res) => {
 
         await medicalFavourService.deleteMedicalService({id});
 
-        res.status(ResponseStatusCodes.CREATED).end();
+        const [services] = await medicalFavourService.getAllMedicalServices();
+
+        res.json(services);
 
     } catch (e) {
         res

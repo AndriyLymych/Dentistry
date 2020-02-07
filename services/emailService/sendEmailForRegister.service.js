@@ -3,7 +3,7 @@ const mailer = require('nodemailer');
 const {EMAIL_DATES} = require('../../constant');
 
 module.exports = async (email, name, middleName) => {
-
+    console.log(22);
     const transport = mailer.createTransport({
         service: 'Gmail',
         auth: {

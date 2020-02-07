@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
 const {userService, emailService} = require('../../services');
-const {passwordHasher, passwordChecker} = require('../../helpers');
+const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
 
@@ -23,9 +23,9 @@ module.exports = async (req, res) => {
 
         patient.password = await passwordHasher(patient.password);
 
-        const newPatient = await userService.createUser(patient);
+        await userService.createUser(patient);
 
-        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
+        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName)
 
         res.status(ResponseStatusCodes.CREATED).end();
 
