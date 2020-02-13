@@ -4,6 +4,7 @@ const {ResponseStatusCodes} = require('../../constant');
 
 module.exports = async (req, res) => {
     try {
+        const {t: token} = req.query;
 
         const {newPassword, newPasswordAgain} = req.body;
         const {user_id: id} = req.user;

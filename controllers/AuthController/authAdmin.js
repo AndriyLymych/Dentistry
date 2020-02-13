@@ -1,6 +1,6 @@
 const {userService, oauthService} = require('../../services');
 const {USER_STATUS, USER_ROLE, ResponseStatusCodes} = require('../../constant');
-const {tokenCreator} = require('../../helpers');
+const {tokenCreator,passwordChecker} = require('../../helpers');
 const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
@@ -19,7 +19,9 @@ module.exports = async (req, res) => {
             throw new CustomError('Admin is blocked', ResponseStatusCodes.FORBIDDEN, 'authAdmin')
 
         }
-        //TODO hashed password check for admin
+
+        await passwordChecker(adminPresent.password, password);
+
         const tokens = tokenCreator();
 
         await oauthService.insertTokens({

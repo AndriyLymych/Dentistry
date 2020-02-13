@@ -6,5 +6,6 @@ module.exports = {
     USER_SPECIALITY: 'UserSpeciality',
     USER_STATUS: 'UserStatus',
     COMMENT: 'Comment',
-    MEDICAL_SERVICE : 'MedicalService'
+    MEDICAL_SERVICE: 'MedicalService',
+    RECEPTION: 'Reception'
 }

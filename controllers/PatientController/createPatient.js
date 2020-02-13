@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 
         await userService.createUser(patient);
 
-        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName)
+        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 
