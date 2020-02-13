@@ -1,3 +1,5 @@
+const {DB_TABLE_NAME: {USER_STATUS}} = require('../../constant');
+
 module.exports = (sequelize, DataTypes) => {
     const UserStatus = sequelize.define('UserStatus', {
         id: {
@@ -11,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: 'user_status',
+        tableName: USER_STATUS,
         timestamps: false
     });
 
