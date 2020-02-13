@@ -1,3 +1,5 @@
+const {DB_TABLE_NAME: {OAUTH_TOKEN}} = require('../../constant');
+
 module.exports = (sequelize, DataTypes) => {
 
     const OAuthToken = sequelize.define('OAuthToken', {
@@ -21,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: 'oauth_token',
+        tableName: OAUTH_TOKEN,
         timestamps: false
     });
 

@@ -4,7 +4,8 @@ const {authController, adminController} = require('../../controllers');
 const {authMiddleware, userMiddleware} = require('../../middlewares');
 
 router.post(
-    '/', authMiddleware.accessTokenChecker,
+    '/',
+    authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
     adminController.createAdmin
 );

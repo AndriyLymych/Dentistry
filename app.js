@@ -6,7 +6,6 @@ require('./dataBase').getInstance().setModels();
 const {PatientRouter, DoctorRouter, AuthRouter, CommentRouter, AdminRouter, MedicalServiceRouter} = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant');
 const config = require('./config/configs');
-const {telegramService} = require('./services');
 
 const app = express();
 app.use(express.urlencoded({extended: true}));

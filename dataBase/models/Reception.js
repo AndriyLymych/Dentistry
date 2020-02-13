@@ -1,3 +1,5 @@
+const {DB_TABLE_NAME: {RECEPTION}} = require('../../constant');
+
 module.exports = (sequelize, DataTypes) => {
 
     const Reception = sequelize.define('Reception', {
@@ -33,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'reception',
+        tableName: RECEPTION,
         timestamps: false
     });
 

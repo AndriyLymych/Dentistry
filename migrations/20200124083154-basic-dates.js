@@ -1,28 +1,28 @@
 'use strict';
-const {USER_ROLE,USER_STATUS,GENDER,defaultAdminDates} =require('../constant');
+const {USER_ROLE,USER_STATUS,GENDER, DB_TABLE_NAME} = require('../constant');
 
-console.log(defaultAdminDates.password);
+// console.log(defaultAdminDates.password);
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     await queryInterface.sequelize.query(
-      `INSERT INTO gender( label) VALUES ( 'male'), ('female')`
+      `INSERT INTO ${DB_TABLE_NAME.GENDER}( label) VALUES ( 'male'), ('female')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_role(label) VALUES ( 'admin'), ('patient'), ('doctor')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_ROLE}(label) VALUES ( 'admin'), ('patient'), ('doctor')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_status( label) VALUES ('active'), ( 'blocked')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_STATUS}( label) VALUES ('active'), ( 'blocked')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_speciality( label) VALUES ( 'orthodontist'), ('orthopaedist'), ('therapist'), ('surgeon')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_SPECIALITY}( label) VALUES ( 'orthodontist'), ('orthopaedist'), ('therapist'), ('surgeon')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user(
+      `INSERT INTO ${DB_TABLE_NAME.USER}(
                     email,
                     password, 
                     name, 
@@ -36,7 +36,7 @@ module.exports = {
                  ) 
                   VALUE (
                     'lymychandriy@gmail.com',
-                    'Pa$$w0rd',
+                    '$2b$10$7z2WEkOZLLUzcQcTbEkeLuKaO6q9l8ou6uNiIposfpjdiO8kXAPG2',
                     'Андрій',
                     'Володимирович',
                     'Лимич',
@@ -47,6 +47,7 @@ module.exports = {
                     ${GENDER.MALE}
                     
                  )`
+    // $2b$10$7z2WEkOZLLUzcQcTbEkeLuKaO6q9l8ou6uNiIposfpjdiO8kXAPG2 -> Pa$$w0rd
     );
   }
   //TODO hash password
