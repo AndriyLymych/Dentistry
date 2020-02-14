@@ -21,13 +21,17 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        middle_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         surname: {
             type: DataTypes.STRING,
             allowNull: false
         },
         age: {
-            type:DataTypes.INTEGER,
-            allowNull:false
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         service_id: {
             type: DataTypes.INTEGER,

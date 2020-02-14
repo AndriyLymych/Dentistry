@@ -9,13 +9,19 @@ router.post(
     authMiddleware.getAdminFromAccessToken,
     adminController.createAdmin
 );
-
+router.put(
+    '/auth/password-change',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    authController.changePassword
+);
 router.post(
     '/services/add',
     authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
     adminController.addNewMedicalService
 );
+
 
 router.post('/auth', authController.authAdmin);
 

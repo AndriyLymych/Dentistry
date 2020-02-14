@@ -15,13 +15,11 @@ router.post(
 
 router.post(
     '/password-refresh',
-    authMiddleware.accessTokenChecker,
-    authMiddleware.getUserFromAccessToken,
     authController.refreshPassword
 );
 
 router.put(
-    '/password-refresh',
+    '/password-change',
     authMiddleware.accessTokenChecker,
     authMiddleware.getUserFromAccessToken,
     authController.changePassword

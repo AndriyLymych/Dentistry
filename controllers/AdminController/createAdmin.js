@@ -16,7 +16,9 @@ module.exports = async (req, res) => {
         const validatedAdmin = Joi.validate(admin, userValidator);
 
         if (validatedAdmin.error) {
-            throw new CustomError(validatedAdmin.error.details[0].message, ResponseStatusCodes.BAD_REQUEST, 'Create Patient');
+            throw new CustomError(
+                validatedAdmin.error.details[0].message, ResponseStatusCodes.BAD_REQUEST, 'Create Patient'
+            );
         }
 
         admin.password = await passwordHasher(admin.password);

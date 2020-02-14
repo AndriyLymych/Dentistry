@@ -8,7 +8,7 @@ const CustomError = require('../../error/CustomError');
 module.exports = async (req, res) => {
     try {
         const reception = req.body;
-
+        console.log(1);
         const validatedReception = Joi.validate(reception, receptionValidator);
 
         if (validatedReception.error) {
@@ -16,9 +16,9 @@ module.exports = async (req, res) => {
                 validatedReception.error.details[0].message, ResponseStatusCodes.BAD_REQUEST, 'receptionPatient'
             );
         }
-
+        console.log(2);
         await userService.receptionPatient(reception);
-
+        console.log(3);
         res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
