@@ -15,6 +15,7 @@ const {
 
 } = require('./router');
 const {ResponseStatusCodesEnum} = require('./constant');
+const {emailService} = require('./services');
 const config = require('./config/configs');
 
 const app = express();
@@ -50,4 +51,5 @@ app.listen(config.PORT, async (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
+
 });

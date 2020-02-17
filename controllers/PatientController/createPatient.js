@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
         patient.role_id = USER_ROLE.PATIENT;
         patient.status_id = USER_STATUS.ACTIVE;
 
+
         const validatedPatient = Joi.validate(patient, userValidator);
 
         if (validatedPatient.error) {
@@ -23,7 +24,7 @@ module.exports = async (req, res) => {
 
         await userService.createUser(patient);
 
-        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
+        // await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 

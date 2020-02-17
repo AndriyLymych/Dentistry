@@ -3,7 +3,6 @@ const mailer = require('nodemailer');
 const {EMAIL_DATES} = require('../../constant');
 
 module.exports = async (email, name, middleName) => {
-    console.log(22);
     const transport = mailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -15,7 +14,7 @@ module.exports = async (email, name, middleName) => {
     await transport.sendMail({
         from: `Simstomat ${EMAIL_DATES.EMAIL} `,
         to: email,
-        subject: 'Hello!',
+        subject: 'Реєстрація',
         html: template()
     });
 

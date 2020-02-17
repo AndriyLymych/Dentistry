@@ -20,7 +20,6 @@ module.exports = {
         try {
 
 
-
             const medicalService = {
                 id: {
                     type: Sequelize.INTEGER,
@@ -240,6 +239,10 @@ module.exports = {
                     autoIncrement: true
                 },
                 phone_number: {
+                    type: Sequelize.STRING,
+                    allowNull: false
+                },
+                email: {
                     type: Sequelize.STRING,
                     allowNull: false
                 },

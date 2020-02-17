@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 
         await userService.createUser(admin);
 
-        await emailService.sendEmailForRegister(admin.email, admin.name, admin.middleName);
+        // await emailService.sendEmailForRegister(admin.email, admin.name, admin.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 
