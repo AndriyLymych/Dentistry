@@ -19,8 +19,10 @@ module.exports = async (req, res) => {
 
         doctor.role_id = USER_ROLE.DOCTOR;
         doctor.status_id = USER_STATUS.ACTIVE;
+        doctor.created_at = new Date().toISOString();
 
         const validatedDoctor = Joi.validate(doctor, userValidator);
+
         if (validatedDoctor.error) {
             throw new CustomError(validatedDoctor.error.details[0].message, 400, 'Create Patient');
         }

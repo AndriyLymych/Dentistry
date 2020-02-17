@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: COMMENT,
+        tableName: 'comment',
         timestamps: false
     });
 

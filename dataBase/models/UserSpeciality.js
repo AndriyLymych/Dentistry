@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: USER_SPECIALITY,
+        tableName: 'user_speciality',
         timestamps: false
     });
 

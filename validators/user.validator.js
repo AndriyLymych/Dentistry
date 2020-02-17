@@ -11,6 +11,7 @@ module.exports = Joi.object().keys({
     age: Joi.number().integer().min(1).max(120).required(),
     city: Joi.string().required(),
     avatar: Joi.string(),
+    created_at: Joi.date(),
     role_id: Joi.number().integer().min(1).max(3).required(),
     speciality_id: Joi.number().integer().min(1).max(4),
     status_id: Joi.number().integer().min(1).max(2),

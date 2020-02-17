@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: RECEPTION,
+        tableName: 'reception',
         timestamps: false
     });
 

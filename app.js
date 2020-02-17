@@ -38,5 +38,4 @@ app.listen(config.PORT, async (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
-    // await telegramService.sendTelegramMessage
 });

@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: OAUTH_TOKEN,
+        tableName: 'oauth_token',
         timestamps: false
     });
 

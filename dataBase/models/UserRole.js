@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: USER_ROLE,
+        tableName: 'user_role',
         timestamps: false
     });
 
