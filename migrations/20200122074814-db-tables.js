@@ -240,7 +240,7 @@ module.exports = {
                     autoIncrement: true
                 },
                 phone_number: {
-                    type: Sequelize.INTEGER,
+                    type: Sequelize.STRING,
                     allowNull: false
                 },
                 date: {

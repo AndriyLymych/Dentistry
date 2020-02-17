@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         phone_number: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         date: {

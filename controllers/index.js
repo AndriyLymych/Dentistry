@@ -4,5 +4,7 @@ module.exports.doctorController = require('./DoctorController');
 module.exports.commentController = require('./CommentController');
 module.exports.adminController = require('./AdminController');
 module.exports.medicalServiceController = require('./MedicalServiceController');
+module.exports.receptionController = require('./ReceptionController');
+
 
 

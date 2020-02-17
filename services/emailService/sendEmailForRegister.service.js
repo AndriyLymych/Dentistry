@@ -13,16 +13,16 @@ module.exports = async (email, name, middleName) => {
     });
 
     await transport.sendMail({
-        from: `Dentistry👻 ${EMAIL_DATES.EMAIL} `,
+        from: `Simstomat ${EMAIL_DATES.EMAIL} `,
         to: email,
         subject: 'Hello!',
         html: template()
     });
 
     function template() {
-        return `<h1> Registration </h1>
+        return `<h1> Реєстрація </h1>
          <br>
-         <p>Hello, ${name} ${middleName}. Congratulations in our dentistry.</p>
+         <p>Добрий день, ${name} ${middleName}. Вітаємо Вас у "Simstomat"! Ваша реєстрація пройшла успішно.</p>
     
          `;
     }
