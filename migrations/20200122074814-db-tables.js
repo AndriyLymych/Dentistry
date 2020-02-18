@@ -306,6 +306,17 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
+                },
+                doctor_id: {
+                    type: Sequelize.INTEGER,
+                    foreignKey: true,
+                    allowNull: false,
+                    references: {
+                        model: 'user',
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 }
             };
 

@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {commentController} = require('../../controllers');
 const {authMiddleware, commentMiddleware} = require('../../middlewares');
 
-router.get('/', commentController.getAllComments);
+router.get('/doctors/:doctor_id', commentController.getAllCommentsForEveryDoctor);
 router.get('/:id', commentController.getCommentById);
 
 router.post(

@@ -9,14 +9,19 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         commentText: {
-            type:DataTypes.TEXT,
-            allowNull:false
+            type: DataTypes.TEXT,
+            allowNull: false
         },
         created_at: {
             type: DataTypes.DATE,
             defaultValue: sequelize.fn('now')
         },
         user_id: {
+            type: DataTypes.INTEGER,
+            foreignKey: true,
+            allowNull: false
+        },
+        doctor_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
@@ -29,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     const User = sequelize.import('./User');
 
     Comment.belongsTo(User, {foreignKey: 'user_id'});
+    Comment.belongsTo(User, {foreignKey: 'doctor_id'});
+
 
     return Comment
 
