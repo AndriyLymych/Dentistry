@@ -4,7 +4,6 @@ const fileUploader = require('express-fileupload');
 
 require('./dataBase').getInstance().setModels();
 const {
-
     PatientRouter,
     DoctorRouter,
     AuthRouter,
@@ -19,12 +18,13 @@ const {emailService} = require('./services');
 const config = require('./config/configs');
 
 const app = express();
+
+app.use(fileUploader({}));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use(express.static(resolve(__dirname, 'public')));
 global.appRoot = __dirname;
-fileUploader({});
 
 app.use('/patients', PatientRouter);
 app.use('/doctors', DoctorRouter);

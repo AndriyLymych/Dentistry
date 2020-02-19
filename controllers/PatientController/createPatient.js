@@ -22,7 +22,9 @@ module.exports = async (req, res) => {
 
         patient.password = await passwordHasher(patient.password);
 
-        await userService.createUser(patient);
+        const {id} = await userService.createUser(patient);
+
+
 
         // await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
 

@@ -1,8 +1,7 @@
-const fsExtra = require('fs-extra');
+const fs = require('fs-extra');
 const {resolve} = require('path');
 const uuid = require('uuid').v1();
 const Joi = require('joi');
-
 
 const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
 const {userService, emailService} = require('../../services');
@@ -13,13 +12,12 @@ const CustomError = require('../../error/CustomError');
 module.exports = async (req, res) => {
     try {
         const doctor = req.body;
-        // const [photo] = req.photos;
-        //
-        // const appRoot = global.appRoot;
+        const [photo] = req.photos;
+
+        const appRoot = global.appRoot;
 
         doctor.role_id = USER_ROLE.DOCTOR;
         doctor.status_id = USER_STATUS.ACTIVE;
-        doctor.created_at = new Date().toISOString();
 
         const validatedDoctor = Joi.validate(doctor, userValidator);
 
@@ -30,14 +28,14 @@ module.exports = async (req, res) => {
         doctor.password = await passwordHasher(doctor.password);
 
         const {id} = await userService.createUser(doctor);
-
-        // const avatarDir = `user/${id}/avatar`;
-        // const avatarExt = photo.name.split('.').pop();
-        // const avatarName = `${uuid}.${avatarExt}`;
         //
-        // await fsExtra.mkdirSync(resolve(appRoot,'public',avatarDir),{recursive:true});
+        // const avatarDir = `user/${id}/avatar`;
+        // const extension = photo.name.split('.').pop();
+        // const avatarName = `${uuid}.${extension}`;
+        // //
+        // await fs.mkdirSync(resolve(appRoot, 'public', avatarDir), {recursive: true});
         // await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
-        // await userService.updateUserByParams({avatar: avatarDir},{id});
+        // await userService.updateUserByParams({avatar: avatarDir}, id);
 
         // await emailService.sendEmailForRegister(doctor.email,doctor.name,doctor.middleName);
 
