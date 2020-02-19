@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {doctorController} = require('../../controllers');
 const {photoMiddleware} = require('../../middlewares');
 
-router.post('/', photoMiddleware.photoCount, photoMiddleware.photoChecker, doctorController.createDoctor);
+router.post('/', doctorController.createDoctor);
 router.get('/', doctorController.getAllDoctors);
 
 

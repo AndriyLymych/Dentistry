@@ -13,7 +13,7 @@ const {
     ReceptionRouter
 
 } = require('./router');
-const {ResponseStatusCodesEnum} = require('./constant');
+const {ResponseStatusCodes} = require('./constant');
 const {emailService} = require('./services');
 const config = require('./config/configs');
 
@@ -24,7 +24,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use(express.static(resolve(__dirname, 'public')));
-global.appRoot = __dirname;
+// global.appRoot = __dirname;
 
 app.use('/patients', PatientRouter);
 app.use('/doctors', DoctorRouter);
@@ -37,7 +37,7 @@ app.use('/receptions', ReceptionRouter);
 
 app.use((err, req, res, next) => {
     res
-        .status(err.status || ResponseStatusCodesEnum.SERVER_ERROR)
+        .status(err.status || ResponseStatusCodes.SERVER_ERROR)
         .json({
             error: {
                 message: err.message || 'Unknown Error',

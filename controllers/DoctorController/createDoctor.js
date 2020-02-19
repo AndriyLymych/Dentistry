@@ -11,14 +11,10 @@ const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
     try {
-        // TODO unknown server error
-        console.log(2);
+
         const doctor = req.body;
         const [photo] = req.photos;
 
-        console.log(doctor);
-
-        const appRoot = global.appRoot;
 
         doctor.role_id = USER_ROLE.DOCTOR;
         doctor.status_id = USER_STATUS.ACTIVE;
@@ -30,16 +26,20 @@ module.exports = async (req, res) => {
         }
 
         doctor.password = await passwordHasher(doctor.password);
+        console.log(22);
 
         const {id} = await userService.createUser(doctor);
 
-        const avatarDir = `user/${id}/avatar`;
-        const extension = photo.name.split('.').pop();
-        const avatarName = `${uuid}.${extension}`;
-        //
-        await fs.mkdirSync(resolve(appRoot, 'public', avatarDir), {recursive: true});
-        await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
-        await userService.updateUserByParams({avatar: avatarDir}, id);
+
+        const photoDir = `user/${id}/photos`;
+        const photoExtension = photo.name.split('.').pop();
+        const photoName = `${uuid}.${photoExtension}`;
+
+        await fs.mkdirSync(resolve( 'public', photoDir), {recursive: true});
+
+        await photo.mv(resolve( 'public', photoDir, photoName));
+
+        await userService.updateUserByParams({photo_path: `${photoDir}/${photoName}`}, {id});
 
         // await emailService.sendEmailForRegister(doctor.email,doctor.name,doctor.middleName);
 
