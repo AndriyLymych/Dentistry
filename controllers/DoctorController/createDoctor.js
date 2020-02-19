@@ -11,8 +11,12 @@ const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
     try {
+        // TODO unknown server error
+        console.log(2);
         const doctor = req.body;
         const [photo] = req.photos;
+
+        console.log(doctor);
 
         const appRoot = global.appRoot;
 
@@ -28,14 +32,14 @@ module.exports = async (req, res) => {
         doctor.password = await passwordHasher(doctor.password);
 
         const {id} = await userService.createUser(doctor);
+
+        const avatarDir = `user/${id}/avatar`;
+        const extension = photo.name.split('.').pop();
+        const avatarName = `${uuid}.${extension}`;
         //
-        // const avatarDir = `user/${id}/avatar`;
-        // const extension = photo.name.split('.').pop();
-        // const avatarName = `${uuid}.${extension}`;
-        // //
-        // await fs.mkdirSync(resolve(appRoot, 'public', avatarDir), {recursive: true});
-        // await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
-        // await userService.updateUserByParams({avatar: avatarDir}, id);
+        await fs.mkdirSync(resolve(appRoot, 'public', avatarDir), {recursive: true});
+        await photo.mv(resolve(appRoot, 'public', avatarDir, avatarName));
+        await userService.updateUserByParams({avatar: avatarDir}, id);
 
         // await emailService.sendEmailForRegister(doctor.email,doctor.name,doctor.middleName);
 
