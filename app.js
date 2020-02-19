@@ -36,6 +36,7 @@ app.use('/receptions', ReceptionRouter);
 
 
 app.use((err, req, res, next) => {
+    console.log(err);
     res
         .status(err.status || ResponseStatusCodes.SERVER_ERROR)
         .json({

@@ -72,7 +72,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'user',
+        // TODO ти заїбав з тим. Чесно
+        tableName: 'User', // TODO ти заїбав з тим. Чесно
+        // TODO ти заїбав з тим. Чесно
         timestamps: false
     });
 

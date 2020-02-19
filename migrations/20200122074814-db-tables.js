@@ -12,13 +12,16 @@ const {
         USER_STATUS
     }
 } = require('../constant');
-// TODO dataBase table unification. created_at and middleName. Use some_text or someText; Not both!
-// TODO replace database table names to constants !
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
-
+            // TODO ше раз то стреш - відріжу вухо !!!!!!!!!!1
+            await queryInterface.sequelize.query(
+              `ALTER DATABASE ${queryInterface.sequelize.config.database}
+                         CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
+            );
+            // TODO ше раз то стреш - відріжу вухо !!!!!!!!!!1
 
             const medicalService = {
                 id: {
@@ -45,7 +48,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('medical_service', medicalService); // TODO databaseTablesEnum
+            await queryInterface.createTable(MEDICAL_SERVICE, medicalService);
 
             const gender = {
                 id: {
@@ -60,7 +63,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('gender', gender);
+            await queryInterface.createTable(GENDER, gender);
 
             const userRole = {
                 id: {
@@ -74,7 +77,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('user_role', userRole);
+            await queryInterface.createTable(USER_ROLE, userRole);
 
             const userSpeciality = {
                 id: {
@@ -88,7 +91,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('user_speciality', userSpeciality);
+            await queryInterface.createTable(USER_SPECIALITY, userSpeciality);
 
             const userStatus = {
                 id: {
@@ -102,7 +105,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('user_status', userStatus);
+            await queryInterface.createTable(USER_STATUS, userStatus);
 
             const user = {
                 id: {
@@ -159,7 +162,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'user_role',
+                        model: USER_ROLE,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -170,7 +173,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: true,
                     references: {
-                        model: 'user_speciality',
+                        model: USER_SPECIALITY,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -181,7 +184,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'user_status',
+                        model: USER_STATUS,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -192,7 +195,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'gender',
+                        model: GENDER,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -200,7 +203,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('user', user);
+            await queryInterface.createTable(USER, user);
 
             const oAuthToken = {
                 id: {
@@ -221,7 +224,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'user',
+                        model: USER,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -229,7 +232,7 @@ module.exports = {
                 }
             };
 
-            await queryInterface.createTable('oauth_token', oAuthToken);
+            await queryInterface.createTable(OAUTH_TOKEN, oAuthToken);
 
             const reception = {
 
@@ -271,7 +274,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'medical_service',
+                        model: MEDICAL_SERVICE,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -280,7 +283,7 @@ module.exports = {
 
             };
 
-            queryInterface.createTable('reception', reception);
+            queryInterface.createTable(RECEPTION, reception);
 
             const comment = {
                 id: {
@@ -301,7 +304,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'user',
+                        model: USER,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -312,7 +315,7 @@ module.exports = {
                     foreignKey: true,
                     allowNull: false,
                     references: {
-                        model: 'user',
+                        model: USER,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',
@@ -320,7 +323,7 @@ module.exports = {
                 }
             };
 
-            queryInterface.createTable('comment', comment);
+            queryInterface.createTable(COMMENT, comment);
 
         } catch (e) {
             console.log(e);
@@ -329,15 +332,15 @@ module.exports = {
 
     down: async (queryInterface, Sequelize) => {
 
-        await queryInterface.dropTable('comment');
-        await queryInterface.dropTable('oauth_token');
-        await queryInterface.dropTable('reception');
-        await queryInterface.dropTable('user');
-        await queryInterface.dropTable('user_role');
-        await queryInterface.dropTable('user_status');
-        await queryInterface.dropTable('user_speciality');
-        await queryInterface.dropTable('gender');
-        await queryInterface.dropTable('medical_service')
+        await queryInterface.dropTable(COMMENT);
+        await queryInterface.dropTable(OAUTH_TOKEN);
+        await queryInterface.dropTable(RECEPTION);
+        await queryInterface.dropTable(USER);
+        await queryInterface.dropTable(USER_ROLE);
+        await queryInterface.dropTable(USER_STATUS);
+        await queryInterface.dropTable(USER_STATUS);
+        await queryInterface.dropTable(GENDER);
+        await queryInterface.dropTable(MEDICAL_SERVICE)
 
     }
 };

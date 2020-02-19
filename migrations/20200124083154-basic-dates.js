@@ -6,19 +6,19 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     await queryInterface.sequelize.query(
-      `INSERT INTO gender( label) VALUES ( 'male'), ('female')`
+      `INSERT INTO ${DB_TABLE_NAME.GENDER}( label) VALUES ( 'male'), ('female')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_role (label) VALUES ( 'admin'), ('patient'), ('doctor')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_ROLE} (label) VALUES ( 'admin'), ('patient'), ('doctor')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_status ( label) VALUES ('active'), ( 'blocked')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_STATUS} ( label) VALUES ('active'), ( 'blocked')`
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO user_speciality ( label) VALUES ( 'orthodontist'), ('orthopaedist'), ('therapist'), ('surgeon')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_SPECIALITY} ( label) VALUES ( 'orthodontist'), ('orthopaedist'), ('therapist'), ('surgeon')`
     );
 
     await queryInterface.sequelize.query(

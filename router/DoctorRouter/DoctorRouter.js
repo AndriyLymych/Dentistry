@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const {doctorController} = require('../../controllers');
-const {photoMiddleware} = require('../../middlewares');
+const {photoMiddleware: {photoChecker, photoCount}} = require('../../middlewares');
 
-router.post('/', doctorController.createDoctor);
+router.post('/', photoChecker, photoCount, doctorController.createDoctor);
 router.get('/', doctorController.getAllDoctors);
 
 
