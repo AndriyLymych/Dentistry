@@ -9,8 +9,5 @@ module.exports = (req, res, next) => {
         )
     }
 
-
-    console.log(4);
-
     next();
 };

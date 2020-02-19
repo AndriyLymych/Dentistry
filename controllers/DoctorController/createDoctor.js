@@ -9,10 +9,11 @@ const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
 
         const doctor = req.body;
+        console.log(req.files);
         const [photo] = req.photos;
 
 
@@ -26,10 +27,8 @@ module.exports = async (req, res) => {
         }
 
         doctor.password = await passwordHasher(doctor.password);
-        console.log(22);
 
         const {id} = await userService.createUser(doctor);
-
 
         const photoDir = `user/${id}/photos`;
         const photoExtension = photo.name.split('.').pop();
@@ -45,11 +44,6 @@ module.exports = async (req, res) => {
 
         res.status(ResponseStatusCodes.CREATED).end();
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e.message, ResponseStatusCodes.SERVER_ERROR, e.controller))
     }
 };
