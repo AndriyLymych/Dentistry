@@ -6,7 +6,10 @@ module.exports = (req, res, next) => {
     req.photos = [];
 
     if (!req.files) {
-         next()
+        return next(new CustomError(
+            `Photo is not present`,
+            403,
+            'photoFileChecker'))
     }
 
     const files = Object.values(req.files);

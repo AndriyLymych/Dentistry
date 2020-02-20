@@ -24,7 +24,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use(express.static(resolve(__dirname, 'public')));
-// global.appRoot = __dirname;
+global.appRoot = __dirname;
+
 
 app.use('/patients', PatientRouter);
 app.use('/doctors', DoctorRouter);
@@ -52,5 +53,6 @@ app.listen(config.PORT, async (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
+
 
 });

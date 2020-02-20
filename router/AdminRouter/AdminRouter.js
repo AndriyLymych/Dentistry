@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {authController, adminController} = require('../../controllers');
-const {authMiddleware, userMiddleware} = require('../../middlewares');
+const {authMiddleware, userMiddleware, photoMiddleware: {photoChecker, photoCount}} = require('../../middlewares');
 
 router.post(
     '/',
@@ -19,8 +19,11 @@ router.post(
     '/services/add',
     authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
+    photoChecker,
+    photoCount,
     adminController.addNewMedicalService
-);
+)
+;
 
 
 router.post('/auth', authController.authAdmin);
