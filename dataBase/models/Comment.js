@@ -2,7 +2,7 @@ const {DB_TABLE_NAME: {COMMENT}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
 
-    const Comment = sequelize.define('Comment', {
+    const Comment = sequelize.define(COMMENT, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'comment',
+        tableName: COMMENT,
         timestamps: false
     });
 

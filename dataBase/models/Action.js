@@ -1,23 +1,21 @@
-const {DB_TABLE_NAME: {USER_SPECIALITY}} = require('../../constant');
+const {DB_TABLE_NAME: {ACTION}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
-    const UserSpeciality = sequelize.define(USER_SPECIALITY, {
+    const Action = sequelize.define(ACTION, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        label:{
+        label: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull: false
         }
 
     }, {
-        tableName: USER_SPECIALITY,
+        tableName: ACTION,
         timestamps: false
     });
 
-    return UserSpeciality;
-
+    return Action
 };
-

@@ -7,5 +7,7 @@ module.exports = {
     USER_STATUS: 'UserStatus',
     COMMENT: 'Comment',
     MEDICAL_SERVICE: 'MedicalService',
-    RECEPTION: 'Reception'
+    RECEPTION: 'Reception',
+    ACTION_TOKEN: 'ActionToken',
+    ACTION:'Action'
 }

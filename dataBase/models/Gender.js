@@ -1,7 +1,7 @@
 const {DB_TABLE_NAME: {GENDER}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
-    const Gender = sequelize.define('Gender', {
+    const Gender = sequelize.define(GENDER, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: 'gender',
+        tableName: GENDER,
         timestamps: false
     });
 

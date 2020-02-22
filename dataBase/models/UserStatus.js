@@ -1,19 +1,20 @@
 const {DB_TABLE_NAME: {USER_STATUS}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
-    const UserStatus = sequelize.define('UserStatus', {
+
+    const UserStatus = sequelize.define(USER_STATUS, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        label:{
+        label: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull: false
         }
 
     }, {
-        tableName: 'userstatus',
+        tableName: USER_STATUS,
         timestamps: false
     });
 

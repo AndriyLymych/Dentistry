@@ -1,7 +1,7 @@
 const {DB_TABLE_NAME: {MEDICAL_SERVICE}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
-    const MedicalService = sequelize.define('MedicalService', {
+    const MedicalService = sequelize.define(MEDICAL_SERVICE, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'medicalservice',
+        tableName: MEDICAL_SERVICE,
         timestamps: false
     });
 

@@ -1,7 +1,7 @@
 const {DB_TABLE_NAME: {USER_ROLE}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
-    const UserRole = sequelize.define('UserRole', {
+    const UserRole = sequelize.define(USER_ROLE, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     }, {
-        tableName: 'userrole',
+        tableName: USER_ROLE,
         timestamps: false
     });
 
