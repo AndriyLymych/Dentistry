@@ -1,5 +1,5 @@
 'use strict';
-const {DB_TABLE_NAME: {ACTION, ACTION_TOKEN}} = require('../constant');
+const {DB_TABLE_NAME: {ACTION, ACTION_TOKEN,USER}} = require('../constant');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
@@ -38,6 +38,17 @@ module.exports = {
                     allowNull: false,
                     references: {
                         model: ACTION,
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
+                },
+                user_id: {
+                    type: Sequelize.INTEGER,
+                    foreignKey: true,
+                    allowNull: false,
+                    references: {
+                        model: USER,
                         key: 'id'
                     },
                     onUpdate: 'CASCADE',

@@ -17,7 +17,10 @@ router.post(
     '/password-refresh',
     authController.refreshPassword
 );
-
+router.put(
+    '/password-refresh',
+    authController.resetPassword
+);
 router.put(
     '/password-change',
     authMiddleware.accessTokenChecker,

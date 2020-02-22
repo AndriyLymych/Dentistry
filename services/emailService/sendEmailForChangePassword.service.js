@@ -1,9 +1,8 @@
 const mailer = require('nodemailer');
 
 const {EMAIL_DATES} = require('../../constant');
-const {tokenCreatorForChangePassword} = require('../../helpers');
-
-module.exports = async (email) => {
+const {resetPasswordTemplate} = require('../../helpers');
+module.exports = async (email,name,middleName,token) => {
 
     const transport = mailer.createTransport({
         service: 'Gmail',
@@ -14,22 +13,11 @@ module.exports = async (email) => {
     });
 
     await transport.sendMail({
-        from: `DENTISTRY👻 ${EMAIL_DATES.EMAIL}`,
+        from: `SIMSTOMAT👻 ${EMAIL_DATES.EMAIL}`,
         to: email,
         subject: 'Change password on dentistry',
-        html: template()
+        html: resetPasswordTemplate(name,middleName,token)
     });
 
 
 };
-
-function template() {
-
-    const {token_for_change_password} = tokenCreatorForChangePassword();
-
-    return `<h1> Password change </h1>
-         <br>
-         <p>You want to change your password. Click on this link please:</p>
-         <a href="http://localhost:3000/auth/password-refresh?t=${token_for_change_password}" methods="post"> LINK </a>
-         `;
-}

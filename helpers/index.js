@@ -4,4 +4,10 @@ module.exports.tokenCreator = require('./tokenCreator');
 module.exports.verifyAccessToken = require('./verifyAccessToken');
 module.exports.verifyRefreshToken = require('./verifyRefreshToken');
 module.exports.verifyTokenForChangePassword = require('./verifyTokenForChangePassword');
+module.exports.verifyTokenForChangePassword = require('./tokenCreatorForResetPassword');
+module.exports.resetPasswordTemplate = require('./resetPasswordTemplate');
+module.exports.tokenCreatorForResetPassword = require('./tokenCreatorForResetPassword');
+
+
+
 

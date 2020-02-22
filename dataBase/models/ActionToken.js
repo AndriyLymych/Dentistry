@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            foreignKey: true,
+            allowNull: false
         }
 
     }, {
@@ -24,8 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     const Action = sequelize.import('./Action');
+    const User = sequelize.import('./User');
 
     ActionToken.belongsTo(Action, {foreignKey: 'action_id'});
+    ActionToken.belongsTo(User, {foreignKey: 'user_id'});
 
     return ActionToken
 }
