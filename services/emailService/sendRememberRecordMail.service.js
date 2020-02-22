@@ -1,16 +1,11 @@
-const mailer = require('nodemailer');
-
 const {EMAIL_DATES} = require('../../constant');
 const {receptionService} = require('../../services');
+const {mailerTransport} = require('../../helpers');
 
 module.exports = async () => {
-    // const transport = mailer.createTransport({
-    //     service: 'Gmail',
-    //     auth: {
-    //         user: EMAIL_DATES.EMAIL,
-    //         pass: EMAIL_DATES.PASSWORD
-    //     }
-    // });
+
+    const {transport} = mailerTransport();
+
 
     // await transport.sendMail({
     //     from: `Simstomat ${EMAIL_DATES.EMAIL} `,

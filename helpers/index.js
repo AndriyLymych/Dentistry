@@ -7,6 +7,7 @@ module.exports.verifyTokenForChangePassword = require('./verifyTokenForChangePas
 module.exports.verifyTokenForChangePassword = require('./tokenCreatorForResetPassword');
 module.exports.resetPasswordTemplate = require('./resetPasswordTemplate');
 module.exports.tokenCreatorForResetPassword = require('./tokenCreatorForResetPassword');
+module.exports.mailerTransport = require('./mailerTransport');
 
 
 
