@@ -16,12 +16,10 @@ const {
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
-            // TODO ше раз то стреш - відріжу вухо !!!!!!!!!!1
             await queryInterface.sequelize.query(
               `ALTER DATABASE ${queryInterface.sequelize.config.database}
                          CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
             );
-            // TODO ше раз то стреш - відріжу вухо !!!!!!!!!!1
 
             const medicalService = {
                 id: {

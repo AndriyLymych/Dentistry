@@ -50,5 +50,4 @@ module.exports = {
     // $2b$10$7z2WEkOZLLUzcQcTbEkeLuKaO6q9l8ou6uNiIposfpjdiO8kXAPG2 -> Pa$$w0rd
     );
   }
-  //TODO hash password
 };

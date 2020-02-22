@@ -7,6 +7,8 @@ module.exports.PHOTO_PARAMS = require('./photoParams.constant');
 module.exports.ResponseStatusCodes = require('./response-status-code.unum');
 module.exports.noCopyRegex = require('./noCopyRegex.validate');
 module.exports.EMAIL_DATES = require('./emailDates');
+module.exports.ACTION = require('./action.enam');
+
 
 
 

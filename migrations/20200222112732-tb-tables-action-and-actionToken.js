@@ -1,23 +1,67 @@
 'use strict';
+const {DB_TABLE_NAME: {ACTION, ACTION_TOKEN}} = require('../constant');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    up: async (queryInterface, Sequelize) => {
+        try {
+            await queryInterface.sequelize.query(
+                `ALTER DATABASE ${queryInterface.sequelize.config.database}
+                         CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
+            );
+            const action ={
+                id: {
+                    type: Sequelize.INTEGER,
+                    primaryKey: true,
+                    autoIncrement: true
+                },
+                label: {
+                    type: Sequelize.STRING,
+                    allowNull: false
+                }
+            };
 
-      Example:
-      return queryInterface.createTable('users', { id: Sequelize.INTEGER });
-    */
-  },
+            await queryInterface.createTable(ACTION, action);
 
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
+            const actionToken = {
+                id: {
+                    type: Sequelize.INTEGER,
+                    primaryKey: true,
+                    autoIncrement: true
+                },
+                action_token: {
+                    type: Sequelize.STRING,
+                    allowNull: false
+                },
+                action_id: {
+                    type: Sequelize.INTEGER,
+                    foreignKey: true,
+                    allowNull: false,
+                    references: {
+                        model: ACTION,
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
+                }
 
-      Example:
-      return queryInterface.dropTable('users');
-    */
-  }
+            };
+
+            await queryInterface.createTable(ACTION_TOKEN, actionToken);
+
+            await queryInterface.sequelize.query(
+                `INSERT INTO ${ACTION}( label) VALUES ( 'reset_password')`
+            );
+
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.dropTable(ACTION_TOKEN);
+        await queryInterface.dropTable(ACTION);
+    }
 };
+
+
