@@ -17,7 +17,7 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
             await queryInterface.sequelize.query(
-              `ALTER DATABASE ${queryInterface.sequelize.config.database}
+                `ALTER DATABASE ${queryInterface.sequelize.config.database}
                          CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
             );
 
@@ -277,12 +277,7 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
-                },
-                count_mail :{
-                    type:Sequelize.INTEGER,
-                    allowNull:false
                 }
-
             };
 
             queryInterface.createTable(RECEPTION, reception);

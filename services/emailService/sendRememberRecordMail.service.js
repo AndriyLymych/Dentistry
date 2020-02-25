@@ -12,12 +12,13 @@ module.exports = async () => {
     const records = JSON.parse(await requestPromise.get(HOST + ':3000/receptions'));
     records.forEach(record => {
 
-        let date = new Date(record.date);
-        date.setDate(date.getDate() - 1);
-        record.date = date;
+        let date = new Date(record.date); // ШО ЗА НАХУЙ ?
+        date.setDate(date.getDate() - 1); // ШО ЗА НАХУЙ ?
+        record.date = date; // ШО ЗА НАХУЙ ?
+
         while (record.count_mail <= 1) {
             cron.schedule('* * * * * *', () => {
-                if (record.date) {
+                if (record.date) { // ШО ЗА НАХУЙ ?
 
                     transport.sendMail({
                         from: `Simstomat ${EMAIL_DATES.EMAIL} `,

@@ -1,14 +1,11 @@
 'use strict';
-const {DB_TABLE_NAME: {ACTION, ACTION_TOKEN,USER}} = require('../constant');
+const {DB_TABLE_NAME: {ACTION, ACTION_TOKEN, USER}} = require('../constant');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
-            await queryInterface.sequelize.query(
-                `ALTER DATABASE ${queryInterface.sequelize.config.database}
-                         CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
-            );
-            const action ={
+
+            const action = {
                 id: {
                     type: Sequelize.INTEGER,
                     primaryKey: true,
@@ -60,7 +57,7 @@ module.exports = {
             await queryInterface.createTable(ACTION_TOKEN, actionToken);
 
             await queryInterface.sequelize.query(
-                `INSERT INTO ${ACTION}( label) VALUES ( 'reset_password')`
+                `INSERT INTO ${ACTION}(label) VALUES ('reset_password')`
             );
 
         } catch (e) {
