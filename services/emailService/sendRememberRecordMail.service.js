@@ -11,6 +11,7 @@ module.exports = async () => {
 
     const records = JSON.parse(await requestPromise.get(HOST + ':3000/receptions'));
     records.forEach(record => {
+
         let date = new Date(record.date);
         date.setDate(date.getDate() - 1);
         record.date = date;
