@@ -49,10 +49,11 @@ app.use((err, req, res, next) => {
         });
 });
 
-app.listen(config.PORT, async (err) => {
+app.listen(config.PORT,  (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
+    emailService.sendRememberRecordMail()
 
 
 });

@@ -6,8 +6,8 @@ module.exports = async reception => {
 
     const ReceptionModel = db.getModel(DB_TABLE_NAME.RECEPTION);
 
-    const record = await ReceptionModel.create(reception, {raw: true});
+    const record = await ReceptionModel.create(reception);
 
-    return record;
+    return record & record.dataValues;
 
 }

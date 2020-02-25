@@ -1,31 +1,40 @@
+const cron = require('node-cron');
+const requestPromise = require('request-promise');
+
 const {EMAIL_DATES} = require('../../constant');
-const {receptionService} = require('../../services');
 const {mailerTransport} = require('../../helpers');
+const {HOST} = require('../../config/configs');
 
 module.exports = async () => {
 
     const {transport} = mailerTransport();
 
+    const records = JSON.parse(await requestPromise.get(HOST + ':3000/receptions'));
 
-    // await transport.sendMail({
-    //     from: `Simstomat ${EMAIL_DATES.EMAIL} `,
-    //     to: email,
-    //     subject: 'Реєстрація',
-    //     html: template()
-    // });
+    cron.schedule('* * * * * *', () => {
+        records.forEach(async record => {
+            let date = new Date(record.date);
+            let count;
+            date.setDate(date.getDate() - 1);
 
-    let records = await receptionService.getAllReceptionRecords();
-    records.forEach(record => {
-            record.date
-        }
-    )
+            record.date = date;
 
-//     function template() {
-//         return `<h1> Реєстрація </h1>
-//          <br>
-//          <p>Добрий день, ${name} ${middleName}. Вітаємо Вас у "Simstomat"! Ваша реєстрація пройшла успішно.</p>
-//
-//          `;
-//     }
-//
+            if (record.date) {
+                try {
+                    await transport.sendMail({
+                        from: `Simstomat ${EMAIL_DATES.EMAIL} `,
+                        to: record.email,
+                        subject: 'Нагадування',
+                        html: `<p>Добрий день, ${record.name}. Нагадуємо що у Вас завтра прийом у стоматології "Simstomat"!</p>`
+                    });
+
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        })
+
+    });
+
+
 };

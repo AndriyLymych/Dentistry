@@ -8,5 +8,5 @@ module.exports = {
 
     ACCESS_TOKEN_LIFE : '10d',
     REFRESH_TOKEN_LIFE : '90d',
-    TOKEN_FOR_RESET_PASSWORD_LIFE : '10d'
+    TOKEN_FOR_RESET_PASSWORD_LIFE : '15m'
 };
