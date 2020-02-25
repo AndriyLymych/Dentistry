@@ -277,6 +277,10 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
+                },
+                count_mail :{
+                    type:Sequelize.INTEGER,
+                    allowNull:false
                 }
 
             };

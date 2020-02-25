@@ -8,6 +8,7 @@ const CustomError = require('../../error/CustomError');
 module.exports = async (req, res) => {
     try {
         const reception = req.body;
+        reception.count_mail  = 0;
 
         const validatedReception = Joi.validate(reception, receptionValidator);
 

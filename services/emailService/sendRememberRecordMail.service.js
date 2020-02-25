@@ -14,22 +14,24 @@ module.exports = async () => {
     cron.schedule('* * * * * *', () => {
         records.forEach(async record => {
             let date = new Date(record.date);
-            let count;
             date.setDate(date.getDate() - 1);
-
             record.date = date;
-
             if (record.date) {
                 try {
-                    await transport.sendMail({
-                        from: `Simstomat ${EMAIL_DATES.EMAIL} `,
-                        to: record.email,
-                        subject: 'Нагадування',
-                        html: `<p>Добрий день, ${record.name}. Нагадуємо що у Вас завтра прийом у стоматології "Simstomat"!</p>`
-                    });
+                    while (record.count_mail <= 1) {
+                        await transport.sendMail({
+                            from: `Simstomat ${EMAIL_DATES.EMAIL} `,
+                            to: record.email,
+                            subject: 'Нагадування',
+                            html: `<p>Добрий день, ${record.name}. Нагадуємо що у Вас завтра прийом у стоматології "Simstomat"!</p>`
+                        })
 
+                        record.count_mail++
+
+                    }
                 } catch (e) {
                     console.log(e);
+
                 }
             }
         })

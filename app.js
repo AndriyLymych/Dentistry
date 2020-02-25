@@ -53,7 +53,7 @@ app.listen(config.PORT,  (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
-    emailService.sendRememberRecordMail()
+    // emailService.sendRememberRecordMail()
 
 
 });

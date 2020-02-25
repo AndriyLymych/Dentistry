@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        email:{
-            type:DataTypes.STRING,
-            allowNull:false
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         date: {
             type: DataTypes.DATE,
@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         service_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
+            allowNull: false
+        },
+        count_mail: {
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     }, {
