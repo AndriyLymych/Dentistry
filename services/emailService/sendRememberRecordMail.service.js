@@ -18,7 +18,7 @@ module.exports = async () => {
         let {id, date, count_mail,email, name} = record;
         date = new Date(date);
         date.setDate(date.getDate() - 1);
-
+            //TODO fix bug with cron
             while (count_mail === 0) {
                 if (date) {
                     await transport.sendMail({
