@@ -1,3 +1,4 @@
+module.exports.DATES = require('./dates');
 module.exports.USER_ROLE = require('./userRole.enam');
 module.exports.USER_STATUS = require('./userStatus.enam');
 module.exports.DB_TABLE_NAME = require('./dbTableName.enam');

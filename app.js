@@ -1,6 +1,7 @@
 const express = require('express');
 const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
+const morgan = require('morgan');
 
 require('./dataBase').getInstance().setModels();
 const {
@@ -18,6 +19,8 @@ const {emailService} = require('./services');
 const config = require('./config/configs');
 
 const app = express();
+
+app.use(morgan('dev'));
 
 app.use(fileUploader({}));
 app.use(express.urlencoded({extended: true}));
