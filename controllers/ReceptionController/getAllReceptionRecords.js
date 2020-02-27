@@ -1,9 +1,11 @@
 const {ResponseStatusCodes} = require('../../constant');
+const {queryParser} = require('../../helpers');
 const {receptionService} = require('../../services');
 
 module.exports = async (req, res) => {
     try {
-        const records = await receptionService.getAllReceptionRecords();
+        const parsedQuery = queryParser(req.query);
+        const records = await receptionService.getAllReceptionRecords(parsedQuery);
 
         res.status(ResponseStatusCodes.CREATED).json(records);
 
@@ -15,5 +17,4 @@ module.exports = async (req, res) => {
                 controller: e.controller || "Get all reception records"
             })
     }
-
 }
