@@ -49,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
         chat_id: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        telegram_msg: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     }, {
         tableName: RECEPTION,
