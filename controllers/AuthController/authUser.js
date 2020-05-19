@@ -32,7 +32,8 @@ module.exports = async (req, res) => {
             ...tokens
         });
 
-        res.json(tokens)
+        res.json(tokens);
+
     } catch (e) {
         res
             .status(e.status)

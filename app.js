@@ -2,6 +2,7 @@ const express = require('express');
 const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 const morgan = require('morgan');
+const cors = require('cors');
 
 require('./dataBase').getInstance().setModels();
 const {
@@ -11,7 +12,8 @@ const {
     CommentRouter,
     AdminRouter,
     MedicalServiceRouter,
-    ReceptionRouter
+    ReceptionRouter,
+    GenderRouter
 
 } = require('./router');
 const {ResponseStatusCodes} = require('./constant');
@@ -21,6 +23,7 @@ const config = require('./config/configs');
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cors())
 
 app.use(fileUploader({}));
 app.use(express.urlencoded({extended: true}));
@@ -37,6 +40,7 @@ app.use('/comments', CommentRouter);
 app.use('/admin', AdminRouter);
 app.use('/services', MedicalServiceRouter);
 app.use('/receptions', ReceptionRouter);
+app.use('/genders', GenderRouter);
 
 
 app.use((err, req, res, next) => {
@@ -56,7 +60,7 @@ app.listen(config.PORT,  (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);
-    emailService.sendRememberRecordMail()
+    // emailService.sendRememberRecordMail()
 
 
 });

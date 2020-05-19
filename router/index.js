@@ -5,6 +5,7 @@ module.exports.CommentRouter = require('./CommentRouter');
 module.exports.AdminRouter = require('./AdminRouter');
 module.exports.MedicalServiceRouter = require('./MedicalServiceRouter');
 module.exports.ReceptionRouter = require('./ReceptionRouter');
+module.exports.GenderRouter = require('./GenderRouter');
 
 
 
