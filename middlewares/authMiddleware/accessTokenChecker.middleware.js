@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
 
     if (!token) {
         return next(new CustomError(
+
             'User is not authorized', ResponseStatusCodes.UNAUTHORIZED, 'AccessTokenChecker.middleware'
         ));
     }

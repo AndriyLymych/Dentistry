@@ -1,10 +1,9 @@
 const {ResponseStatusCodes} = require('../../constant');
 const {commentService, userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
     try {
-        let filteredObj={};
+        let filteredObj = {};
         const {doctor_id} = req.params;
         let {limit, page} = req.query;
 
@@ -12,11 +11,13 @@ module.exports = async (req, res) => {
         page = page - 1;
 
         const commentCount = await commentService.commentCountForDoctor(doctor_id);
+
         const comments = await commentService.getAllComments(
             doctor_id,
             +(limit),
             limit * page
         );
+
 
         filteredObj.comments = comments;
         filteredObj.pageCount = Math.ceil(commentCount.comments_count / limit);

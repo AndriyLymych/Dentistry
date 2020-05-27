@@ -11,8 +11,18 @@ module.exports = async (doctor_id, limit, offset) => {
             where: {doctor_id},
             include: [{
                 model: UserModel,
-                attributes: ['id', 'name', 'surname']
-            }],
+                as:'Doctor',
+                attributes: ['id', 'name', 'surname'],
+            },
+                {
+                    model:UserModel,
+                    as:'Commentator',
+                    attributes:['id','name','surname','avatar']
+                }
+                ],
+            order:[
+                ['id', 'DESC']
+            ],
             limit,
             offset,
         }

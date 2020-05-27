@@ -7,7 +7,7 @@ module.exports = async (req,res)=>{
 
         await oauthService.deleteTokensFromDB({access_token:token});
 
-        res.status(ResponseStatusCodes.GONE).end()
+        res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
         res

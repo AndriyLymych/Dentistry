@@ -255,7 +255,7 @@ module.exports = {
                     type: Sequelize.STRING,
                     allowNull: false
                 },
-                middle_name: {
+                middleName: {
                     type: Sequelize.STRING,
                     allowNull: false
                 },

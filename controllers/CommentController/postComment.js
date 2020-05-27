@@ -1,16 +1,18 @@
 const Joi = require('joi');
 
 const {commentService} = require('../../services');
-const {ResponseStatusCodes} = require('../../constant');
-const {commentValidator} =require('../../validators');
-const CustomError =require('../../error/CustomError');
+const {ResponseStatusCodes,defaultCommentsLimit} = require('../../constant');
+const {commentValidator} = require('../../validators');
+const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
     try {
         const comment = req.body;
-        const {user_id} =req.user;
+        const {user_id} = req.user;
+        const {doc} = req.query;
 
         comment.user_id = user_id;
+        comment.doctor_id = doc;
 
         const validatedComment = Joi.validate(comment, commentValidator);
 
@@ -20,14 +22,16 @@ module.exports = async (req, res) => {
 
         await commentService.postComment(comment);
 
-        res.status(ResponseStatusCodes.CREATED).end()
+        const comments = await commentService.getAllComments(doc,defaultCommentsLimit.COMMENT_LIMIT);
+
+        res.status(ResponseStatusCodes.CREATED).json(comments)
 
     } catch (e) {
         res
             .status(ResponseStatusCodes.FORBIDDEN)
             .json({
-                message:e.message,
-                controller:e.controller || 'postComment'
+                message: e.message,
+                controller: e.controller || 'postComment'
             })
     }
 

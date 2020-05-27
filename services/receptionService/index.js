@@ -3,5 +3,6 @@ module.exports.incrementCountMail = require('./incrementCountMail.service');
 module.exports.getFutureReceptions = require('./getFutureReceptions.service');
 module.exports.setChatId = require('./setChat_id.service');
 module.exports.incrementTelegramMsg = require('./incrementTelegramMsg.service');
+module.exports.getReceptionRecordsForPatientByParams = require('./getReceptionRecordsForPatientByParams');
 
 

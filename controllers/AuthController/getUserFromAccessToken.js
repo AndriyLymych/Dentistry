@@ -1,6 +1,4 @@
-const {userService, oauthService} = require('../../services');
-const {USER_STATUS, USER_ROLE, ResponseStatusCodes} = require('../../constant');
-const {tokenCreator, passwordChecker} = require('../../helpers');
+const {userService} = require('../../services');
 const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {

@@ -6,7 +6,7 @@ module.exports = async id => {
 
     const user = await UserModel.findOne({
         where: {id},
-        attributes : ['id','name','middleName','surname','age','city','avatar']
+        attributes : ['id','email','name','middleName','surname','age','city','avatar']
     });
 
     return user && user.dataValues

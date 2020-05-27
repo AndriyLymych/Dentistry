@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
 
     const User = sequelize.import('./User');
 
-    Comment.belongsTo(User, {foreignKey: 'user_id'});
-    Comment.belongsTo(User, {foreignKey: 'doctor_id'});
+    Comment.belongsTo(User, {foreignKey: 'user_id',as:'Commentator'});
+    Comment.belongsTo(User, {foreignKey: 'doctor_id',as:'Doctor'});
 
 
     return Comment
