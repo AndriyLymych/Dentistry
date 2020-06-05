@@ -16,4 +16,4 @@ module.exports = Joi.object().keys({
     speciality_id: Joi.number().integer().min(1).max(4),
     status_id: Joi.number().integer().min(1).max(2),
     gender_id: Joi.number().integer().min(1).max(2)
-})
+});

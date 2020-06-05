@@ -1,20 +1,16 @@
-const {DB_TABLE_NAME: {COMMENT}} = require('../../constant');
+const {DB_TABLE_NAME: {DOCTOR_RATING}} = require('../../constant');
 
 module.exports = (sequelize, DataTypes) => {
 
-    const Comment = sequelize.define(COMMENT, {
+    const DoctorRating = sequelize.define(DOCTOR_RATING, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        commentText: {
-            type: DataTypes.TEXT,
+        mark: {
+            type: DataTypes.INTEGER,
             allowNull: false
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.fn('now')
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -25,18 +21,22 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
+        },
+        isEvaluated: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
-        tableName: COMMENT,
+        tableName: DOCTOR_RATING,
         timestamps: false
     });
 
     const User = sequelize.import('./User');
 
-    Comment.belongsTo(User, {foreignKey: 'user_id', as: 'Commentator'});
-    Comment.belongsTo(User, {foreignKey: 'doctor_id', as: 'Doctor'});
+    DoctorRating.belongsTo(User, {foreignKey: 'user_id', as: 'Critic'});
+    DoctorRating.belongsTo(User, {foreignKey: 'doctor_id', as: 'Doctor'});
 
 
-    return Comment
+    return DoctorRating
 
 };

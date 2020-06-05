@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const {resolve} = require('path');
-const uuid = require('uuid').v1();
+const uuid = require('uuid').v4();
 const Joi = require('joi');
 
 const {USER_ROLE, USER_STATUS, ResponseStatusCodes} = require('../../constant');
@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
 
         const {id} = await userService.createUser(doctor);
 
-        const photoDir = `patient/${id}/avatar`;
+        const photoDir = `doctor/${id}/avatar`;
         const photoExtension = photo.name.split('.').pop();
         const photoName = `${uuid}.${photoExtension}`;
 

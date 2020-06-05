@@ -25,32 +25,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        middleName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        surname: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        age: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         service_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
         },
         count_mail: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        chat_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        telegram_msg: {
             type: DataTypes.INTEGER,
             allowNull: true
         }

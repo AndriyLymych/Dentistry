@@ -13,7 +13,8 @@ const {
     AdminRouter,
     MedicalServiceRouter,
     ReceptionRouter,
-    GenderRouter
+    GenderRouter,
+    UserRouter
 
 } = require('./router');
 const {ResponseStatusCodes} = require('./constant');
@@ -41,6 +42,8 @@ app.use('/admin', AdminRouter);
 app.use('/services', MedicalServiceRouter);
 app.use('/receptions', ReceptionRouter);
 app.use('/genders', GenderRouter);
+app.use('/genders', GenderRouter);
+app.use('/users', UserRouter);
 
 
 app.use((err, req, res, next) => {
@@ -48,15 +51,15 @@ app.use((err, req, res, next) => {
     res
         .status(err.status || ResponseStatusCodes.SERVER_ERROR)
         .json({
-            error: {
-                message: err.message || 'Unknown Error',
-                code: err.code,
-                data: err.data
-            }
+            message: err.message || 'Unknown Error',
+            code: err.code,
+            data: err.data,
+            controller: err.controller
+
         });
 });
 
-app.listen(config.PORT,  (err) => {
+app.listen(config.PORT, (err) => {
     if (err) console.log(err);
 
     console.log(`listening port ${config.PORT}...`);

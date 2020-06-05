@@ -1,5 +1,6 @@
 const {EMAIL_DATES} = require('../../constant');
 const {resetPasswordTemplate, mailerTransport} = require('../../helpers');
+
 module.exports = async (email, name, middleName, token) => {
 
     const {transport} = mailerTransport();

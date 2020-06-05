@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
 
         const userPresent = await userService.getUserByParams({email});
 
+
         if (!userPresent) {
             throw new CustomError('User is not present', ResponseStatusCodes.NOT_FOUND, 'refreshPassword');
         }
@@ -28,6 +29,8 @@ module.exports = async (req, res) => {
         );
 
         res.status(ResponseStatusCodes.CREATED).end()
+
+
     } catch (e) {
         res
             .status(e.status)

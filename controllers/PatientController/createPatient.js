@@ -22,11 +22,10 @@ module.exports = async (req, res) => {
 
         patient.password = await passwordHasher(patient.password);
 
-        const {id} = await userService.createUser(patient);
+        await userService.createUser(patient);
+        console.log(patient.email);
 
-
-
-        // await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
+        await emailService.sendEmailForRegister(patient.email,patient.name,patient.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 

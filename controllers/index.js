@@ -6,6 +6,7 @@ module.exports.adminController = require('./AdminController');
 module.exports.medicalServiceController = require('./MedicalServiceController');
 module.exports.receptionController = require('./ReceptionController');
 module.exports.genderController = require('./GenderController');
+module.exports.userController = require('./UserController');
 
 
 

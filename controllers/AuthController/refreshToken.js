@@ -5,6 +5,7 @@ const {ResponseStatusCodes} = require('../../constant');
 module.exports = async (req, res) => {
     try {
         const refresh_token = req.get('Authorization');
+
         const {user_id} = req.user;
 
         const newTokens = tokenCreator();

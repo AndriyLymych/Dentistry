@@ -9,5 +9,6 @@ module.exports = {
     MEDICAL_SERVICE: 'MedicalService',
     RECEPTION: 'Reception',
     ACTION_TOKEN: 'ActionToken',
-    ACTION:'Action'
+    ACTION:'Action',
+    DOCTOR_RATING:'DoctorRating'
 }

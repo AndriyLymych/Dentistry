@@ -9,7 +9,8 @@ const {
         RECEPTION,
         USER,
         USER_SPECIALITY,
-        USER_STATUS
+        USER_STATUS,
+        DOCTOR_RATING
     }
 } = require('../constant');
 
@@ -255,18 +256,6 @@ module.exports = {
                     type: Sequelize.STRING,
                     allowNull: false
                 },
-                middleName: {
-                    type: Sequelize.STRING,
-                    allowNull: false
-                },
-                surname: {
-                    type: Sequelize.STRING,
-                    allowNull: false
-                },
-                age: {
-                    type: Sequelize.INTEGER,
-                    allowNull: false
-                },
                 service_id: {
                     type: Sequelize.INTEGER,
                     foreignKey: true,
@@ -277,6 +266,11 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
+                },
+                count_mail: {
+                    type: Sequelize.INTEGER,
+                    allowNull: true,
+
                 }
             };
 
@@ -322,6 +316,46 @@ module.exports = {
 
             queryInterface.createTable(COMMENT, comment);
 
+            const doctorRating = {
+                id: {
+                    type: Sequelize.INTEGER,
+                    primaryKey: true,
+                    autoIncrement: true
+                },
+                mark: {
+                    type: Sequelize.INTEGER,
+                    allowNull: false
+                },
+                user_id: {
+                    type: Sequelize.INTEGER,
+                    foreignKey: true,
+                    allowNull: false,
+                    references: {
+                        model: USER,
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
+                },
+                doctor_id: {
+                    type: Sequelize.INTEGER,
+                    foreignKey: true,
+                    allowNull: false,
+                    references: {
+                        model: USER,
+                        key: 'id'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
+                },
+                isEvaluated: {
+                    type: Sequelize.BOOLEAN,
+                    defaultValue: false
+                }
+            };
+
+            queryInterface.createTable(DOCTOR_RATING, doctorRating);
+
         } catch (e) {
             console.log(e);
         }
@@ -330,6 +364,7 @@ module.exports = {
     down: async (queryInterface, Sequelize) => {
 
         await queryInterface.dropTable(COMMENT);
+        await queryInterface.dropTable(DOCTOR_RATING);
         await queryInterface.dropTable(OAUTH_TOKEN);
         await queryInterface.dropTable(RECEPTION);
         await queryInterface.dropTable(USER);

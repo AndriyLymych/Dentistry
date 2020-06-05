@@ -24,7 +24,7 @@ router.post(
     authController.refreshPassword
 );
 router.put(
-    '/password-refresh',
+    '/password-refresh/:token',
     authController.resetPassword
 );
 router.put(
