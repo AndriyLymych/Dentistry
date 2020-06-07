@@ -2,14 +2,12 @@ const router = require('express').Router();
 
 const {
     userController: {
-        updateUserProfile
+        updateUserProfile,
+        evaluateDoctor
     }
 } = require('../../controllers');
 const {
-    photoMiddleware: {
-        photoChecker,
-        photoCount
-    },
+
     authMiddleware: {
         accessTokenChecker,
         getUserFromAccessToken
@@ -22,6 +20,13 @@ router.put(
     accessTokenChecker,
     getUserFromAccessToken,
     updateUserProfile
+);
+
+router.post(
+    '/evaluate-doctor',
+    accessTokenChecker,
+    getUserFromAccessToken,
+    evaluateDoctor
 );
 
 

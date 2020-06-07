@@ -9,4 +9,4 @@ module.exports = async commentText => {
 
     return newComment && newComment.dataValues
 
-}
+};
