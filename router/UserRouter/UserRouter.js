@@ -5,7 +5,7 @@ const {
         updateUserProfile,
         evaluateDoctor,
         getIsEvaluateForUser,
-        getAverageMark
+        getAllUsers
     }
 } = require('../../controllers');
 const {
@@ -36,10 +36,12 @@ router.get(
     getUserFromAccessToken,
     getIsEvaluateForUser
 );
+
 router.get(
-    '/average-mark',
-    getAverageMark
+    '/',
+  getAllUsers
 );
+
 
 
 module.exports = router;

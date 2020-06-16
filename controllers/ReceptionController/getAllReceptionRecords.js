@@ -26,4 +26,4 @@ module.exports = async (req, res) => {
                 controller: e.controller || "Get all reception records"
             })
     }
-}
+};

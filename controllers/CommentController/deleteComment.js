@@ -7,7 +7,6 @@ module.exports = async (req, res) => {
 
         await commentService.deleteComment({id});
 
-
         res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
@@ -19,4 +18,4 @@ module.exports = async (req, res) => {
             })
     }
 
-}
+};
