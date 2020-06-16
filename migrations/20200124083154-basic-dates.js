@@ -1,7 +1,6 @@
 'use strict';
 const {USER_ROLE,USER_STATUS,GENDER, DB_TABLE_NAME} = require('../constant');
 
-// console.log(defaultAdminDates.password);
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -18,7 +17,7 @@ module.exports = {
     );
 
     await queryInterface.sequelize.query(
-      `INSERT INTO ${DB_TABLE_NAME.USER_SPECIALITY} ( label) VALUES ( 'orthodontist'), ('orthopaedist'), ('therapist'), ('surgeon')`
+      `INSERT INTO ${DB_TABLE_NAME.USER_SPECIALITY} ( label) VALUES ( 'терапевт'), ('зубний технык'), ('хірург'), ('ортодонт')`
     );
 
     await queryInterface.sequelize.query(

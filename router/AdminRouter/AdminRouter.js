@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {authController, adminController} = require('../../controllers');
+const {authController, adminController, doctorController} = require('../../controllers');
 const {authMiddleware, userMiddleware, photoMiddleware: {photoChecker, photoCount}} = require('../../middlewares');
 
 router.post(
@@ -52,6 +52,17 @@ router.delete(
     authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
     adminController.deleteMedicalService
+);
+router.get(
+    '/auth/me',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    authController.getAdminDatesFromAccessToken
+);
+router.post('/create-doctor',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    doctorController.createDoctor
 );
 
 module.exports = router;

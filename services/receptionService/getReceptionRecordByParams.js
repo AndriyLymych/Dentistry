@@ -4,8 +4,8 @@ const db = require('../../dataBase').getInstance();
 module.exports = async object => {
     const ReceptionModel = db.getModel(DB_TABLE_NAME.RECEPTION);
 
-    const records = await ReceptionModel.findAll({
+    const record = await ReceptionModel.findOne({
         where: object
     });
-    return records && records.dataValues
+    return record && record.dataValues
 }

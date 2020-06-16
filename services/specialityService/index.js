@@ -1,0 +1,1 @@
+module.exports.getSpecialities = require('./getSpecialities.service')

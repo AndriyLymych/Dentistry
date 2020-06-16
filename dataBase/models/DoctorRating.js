@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
-        },
-        isEvaluated: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
         }
     }, {
         tableName: DOCTOR_RATING,

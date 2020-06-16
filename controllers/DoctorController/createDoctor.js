@@ -13,9 +13,6 @@ module.exports = async (req, res, next) => {
     try {
 
         const doctor = req.body;
-        const [photo] = req.photos;
-
-        const appRoot = global.appRoot;
 
         doctor.role_id = USER_ROLE.DOCTOR;
         doctor.status_id = USER_STATUS.ACTIVE;
@@ -28,17 +25,7 @@ module.exports = async (req, res, next) => {
 
         doctor.password = await passwordHasher(doctor.password);
 
-        const {id} = await userService.createUser(doctor);
-
-        const photoDir = `doctor/${id}/avatar`;
-        const photoExtension = photo.name.split('.').pop();
-        const photoName = `${uuid}.${photoExtension}`;
-
-        await fs.mkdirSync(resolve(appRoot, 'public', photoDir), {recursive: true});
-
-        await photo.mv(resolve(appRoot, 'public', photoDir, photoName));
-
-        await userService.updateUserByParams({avatar: `${photoDir}/${photoName}`}, id);
+        await userService.createUser(doctor);
 
         // await emailService.sendEmailForRegister(doctor.email,doctor.name,doctor.middleName);
 

@@ -347,10 +347,6 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
-                },
-                isEvaluated: {
-                    type: Sequelize.BOOLEAN,
-                    defaultValue: false
                 }
             };
 

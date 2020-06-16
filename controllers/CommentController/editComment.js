@@ -1,15 +1,15 @@
 const Joi = require('joi');
 
-const {ResponseStatusCodes,defaultCommentsLimit} = require('../../constant');
+const {ResponseStatusCodes} = require('../../constant');
 const {commentService} = require('../../services');
 const {commentValidator} =require('../../validators');
 const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res) => {
+
     try {
         const {id} = req.params;
         const newComment = req.body;
-        const {doc} = req.query;
 
         const editedComment = Joi.validate(newComment,commentValidator);
 
@@ -18,9 +18,9 @@ module.exports = async (req, res) => {
         }
 
         await commentService.updateComment(newComment, id);
-        const comments = await commentService.getAllComments(doc,defaultCommentsLimit.COMMENT_LIMIT);
 
-        res.status(ResponseStatusCodes.CREATED).json(comments);
+
+        res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
         res

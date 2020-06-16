@@ -3,7 +3,9 @@ const router = require('express').Router();
 const {
     userController: {
         updateUserProfile,
-        evaluateDoctor
+        evaluateDoctor,
+        getIsEvaluateForUser,
+        getAverageMark
     }
 } = require('../../controllers');
 const {
@@ -27,6 +29,16 @@ router.post(
     accessTokenChecker,
     getUserFromAccessToken,
     evaluateDoctor
+);
+router.get(
+    '/is-evaluated',
+    accessTokenChecker,
+    getUserFromAccessToken,
+    getIsEvaluateForUser
+);
+router.get(
+    '/average-mark',
+    getAverageMark
 );
 
 

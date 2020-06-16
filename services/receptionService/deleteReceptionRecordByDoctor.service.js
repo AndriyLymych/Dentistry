@@ -1,11 +1,14 @@
 const {DB_TABLE_NAME} = require('../../constant');
 const db = require('../../dataBase').getInstance();
 
-module.exports = async object => {
+module.exports = async id => {
+
     const ReceptionModel = db.getModel(DB_TABLE_NAME.RECEPTION);
 
-    const records = await ReceptionModel.findAll({
-        where: object
-    });
-    return records && records.dataValues
+    await ReceptionModel.destroy({
+        where: {
+            id
+        }
+    })
+
 }

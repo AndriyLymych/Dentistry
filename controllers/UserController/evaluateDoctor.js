@@ -7,7 +7,7 @@ const CustomError = require('../../error/CustomError');
 
 module.exports = async (req, res, next) => {
     try {
-        const avgDoctorMark = {};
+        let avgDoctorMark = {};
         const evaluatedData = req.body;
         const {user_id} = req.user;
         const {doctor_id} = req.query;
@@ -25,9 +25,10 @@ module.exports = async (req, res, next) => {
         await doctorRatingService.setDoctorMark(evaluatedData);
 
         const {average_doctor_mark:avgMark} = await doctorRatingService.getAVGDoctorMark(doctor_id);
-        const {isEvaluated} = await doctorRatingService.getIsUserEvaluate(user_id);
 
-        avgDoctorMark.avgDoctorMark= {avgMark,isEvaluated};
+        const {isEvaluated} = await doctorRatingService.getIsUserEvaluate(user_id,doctor_id);
+
+        avgDoctorMark= {avgMark,isEvaluated};
 
         res.status(ResponseStatusCodes.CREATED).json(avgDoctorMark);
 

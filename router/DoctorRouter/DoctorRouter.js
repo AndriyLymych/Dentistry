@@ -12,8 +12,7 @@ const {
     }
 } = require('../../middlewares');
 
-router.post('/', photoChecker, photoCount, doctorController.createDoctor);
-
+router.get('/specialities',doctorController.getAllSpecialities)
 router.put(
     '/update-avatar',
     accessTokenChecker,
