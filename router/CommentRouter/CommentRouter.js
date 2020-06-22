@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {commentController} = require('../../controllers');
-const {authMiddleware, commentMiddleware} = require('../../middlewares');
+const {authMiddleware} = require('../../middlewares');
 
 router.get('/doctors/:doctor_id', commentController.getAllCommentsForEveryDoctor);
 router.get('/:id', commentController.getCommentById);
@@ -17,7 +17,6 @@ router.use(
     '/:id',
     authMiddleware.accessTokenChecker,
     authMiddleware.getUserFromAccessToken,
-    commentMiddleware.commentPresent
 );
 
 router.put('/:id', commentController.editComment);

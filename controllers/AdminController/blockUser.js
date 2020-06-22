@@ -1,13 +1,18 @@
 const {oauthService, adminService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 const {ResponseStatusCodes, USER_STATUS} = require('../../constant');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {id, status_id} = req.user;
 
         if (status_id === USER_STATUS.BLOCKED) {
-            throw new CustomError('User is already blocked', ResponseStatusCodes.FORBIDDEN, 'blockUser')
+
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_BLOCK_USER.message,
+                CustomErrorData.BAD_REQUEST_BLOCK_USER.code,
+            )
         }
 
         await adminService.blockUser(id);
@@ -17,12 +22,8 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 
 }

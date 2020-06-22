@@ -1,5 +1,5 @@
-const CustomError = require('../../error/CustomError');
-const {PHOTO_PARAMS} = require('../../constant');
+const {CustomError, CustomErrorData} = require('../../error');
+const {PHOTO_PARAMS, ResponseStatusCodes} = require('../../constant');
 
 module.exports = (req, res, next) => {
 
@@ -7,9 +7,10 @@ module.exports = (req, res, next) => {
 
     if (!req.files) {
         return next(new CustomError(
-            `Photo is not present`,
-            403,
-            'photoFileChecker'))
+            ResponseStatusCodes.FORBIDDEN,
+            CustomErrorData.FORBIDDEN_PHOTO_NOT_PRESENT.message,
+            CustomErrorData.FORBIDDEN_PHOTO_NOT_PRESENT.code,
+        ));
     }
 
     const files = Object.values(req.files);
@@ -21,10 +22,10 @@ module.exports = (req, res, next) => {
 
             if (PHOTO_PARAMS.PHOTO_MAX_SIZE < size) {
                 return next(new CustomError(
-                    `Max file size is ${PHOTO_PARAMS.PHOTO_MAX_SIZE / (1024 * 1024)}mb`,
-                    400,
-                    'photoFileChecker')
-                )
+                    ResponseStatusCodes.FORBIDDEN,
+                    CustomErrorData.FORBIDDEN_PHOTO_BIG_SIZE.message,
+                    CustomErrorData.FORBIDDEN_PHOTO_BIG_SIZE.code,
+                ));
             }
 
             req.photos.push(files[i])

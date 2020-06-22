@@ -1,9 +1,9 @@
 const {userService, oauthService} = require('../../services');
 const {USER_STATUS, USER_ROLE, ResponseStatusCodes} = require('../../constant');
-const {tokenCreator,passwordChecker} = require('../../helpers');
-const CustomError = require('../../error/CustomError');
+const {tokenCreator, passwordChecker} = require('../../helpers');
+const {CustomError,CustomErrorData} = require('../../error');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {email, password} = req.body;
 
@@ -13,11 +13,18 @@ module.exports = async (req, res) => {
         });
 
         if (!adminPresent) {
-            throw new CustomError('Such user is not register', ResponseStatusCodes.FORBIDDEN, 'authAdmin')
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+            )
         }
         if (adminPresent.status_id === USER_STATUS.BLOCKED) {
-            throw new CustomError('Admin is blocked', ResponseStatusCodes.FORBIDDEN, 'authAdmin')
-
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_USER_IS_BLOCKED.message,
+                CustomErrorData.FORBIDDEN_USER_IS_BLOCKED.code,
+            )
         }
 
         await passwordChecker(adminPresent.password, password);
@@ -31,11 +38,7 @@ module.exports = async (req, res) => {
 
         res.json(tokens)
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller || "authAdmin"
-            })
+        next(new CustomError(e))
+
     }
 }

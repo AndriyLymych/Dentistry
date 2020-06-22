@@ -24,7 +24,7 @@ const config = require('./config/configs');
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cors())
+app.use(cors());
 
 app.use(fileUploader({}));
 app.use(express.urlencoded({extended: true}));

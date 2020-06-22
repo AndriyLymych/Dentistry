@@ -6,7 +6,7 @@ const {passwordHasher} = require('../../helpers');
 const {userValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res,next) => {
     try {
         const admin = req.body;
 
@@ -30,11 +30,7 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 };

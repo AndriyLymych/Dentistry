@@ -16,14 +16,34 @@ router.put(
     authController.changePassword
 );
 router.post(
-    '/services/add',
+    '/services',
     authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
     photoChecker,
     photoCount,
     adminController.addNewMedicalService
-)
-;
+);
+
+router.delete(
+    '/services/:id',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    adminController.deleteMedicalService
+);
+router.put(
+    '/services/:id',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    adminController.updateMedicalService
+);
+router.put(
+    '/services/photo/:id',
+    authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    photoChecker,
+    photoCount,
+    adminController.updateMedicalServicePhoto
+);
 
 
 router.post('/auth', authController.authAdmin);
@@ -47,12 +67,7 @@ router.put('/users/:id/block', adminController.blockUser);
 
 router.put('/users/:id/unblock', adminController.unblockUser);
 
-router.delete(
-    '/services/delete/:id',
-    authMiddleware.accessTokenChecker,
-    authMiddleware.getAdminFromAccessToken,
-    adminController.deleteMedicalService
-);
+
 router.get(
     '/auth/me',
     authMiddleware.accessTokenChecker,

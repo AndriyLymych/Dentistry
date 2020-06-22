@@ -1,34 +1,39 @@
 const {ResponseStatusCodes, USER_ROLE} = require('../../constant');
 const {receptionService, userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
 
         const {user_id} = req.user;
 
-        const {record_id:id} = req.params;
+        const {record_id: id} = req.params;
 
         const {role_id} = await userService.getUserById(user_id);
         const isRecordPresent = await receptionService.getReceptionRecordById(id);
 
-        if (role_id !== USER_ROLE.DOCTOR ){
-            throw new CustomError('You are not a doctor',ResponseStatusCodes.FORBIDDEN,'delete reception record by doctor')
+        if (role_id !== USER_ROLE.DOCTOR) {
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_YOU_ARE_NOT_DOCTOR.message,
+                CustomErrorData.BAD_REQUEST_YOU_ARE_NOT_DOCTOR.code,
+            )
         }
-        if (!isRecordPresent){
-            throw new CustomError('Not such record',ResponseStatusCodes.FORBIDDEN,'delete reception record by doctor')
+
+        if (!isRecordPresent) {
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_RECORD_NOT_PRESENT.message,
+                CustomErrorData.FORBIDDEN_RECORD_NOT_PRESENT.code,
+            )
         }
-            await receptionService.deleteReceptionRecordByDoctor(id);
+        await receptionService.deleteReceptionRecordByDoctor(id);
 
 
         res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.NOT_FOUND)
-            .json({
-                message: e.message,
-                controller: e.controller || "delete reception record by doctor"
-            })
+        next(new CustomError(e))
+
     }
 }

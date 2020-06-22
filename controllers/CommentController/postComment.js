@@ -5,7 +5,7 @@ const {ResponseStatusCodes} = require('../../constant');
 const {commentValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const comment = req.body;
         const {user_id} = req.user;
@@ -26,12 +26,8 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.FORBIDDEN)
-            .json({
-                message: e.message,
-                controller: e.controller || 'postComment'
-            })
+        next(new CustomError(e))
+
     }
 
 }

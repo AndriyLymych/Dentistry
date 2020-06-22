@@ -1,9 +1,9 @@
 const {userService, emailService, authService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 const {ResponseStatusCodes, ACTION} = require('../../constant');
 const {tokenCreatorForResetPassword} = require('../../helpers');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {email} = req.body;
 
@@ -11,10 +11,15 @@ module.exports = async (req, res) => {
 
 
         if (!userPresent) {
-            throw new CustomError('User is not present', ResponseStatusCodes.NOT_FOUND, 'refreshPassword');
-        }
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+            )
+        };
+
         const {action_token} = tokenCreatorForResetPassword();
-        console.log(action_token);
+
         authService.insertTokenForChangePassword({
             user_id: userPresent.id,
             action_token,
@@ -32,11 +37,7 @@ module.exports = async (req, res) => {
 
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 }

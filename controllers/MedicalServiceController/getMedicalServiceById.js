@@ -1,26 +1,26 @@
 const {ResponseStatusCodes} = require('../../constant');
 const {medicalFavourService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {id} = req.params;
 
         const service = await medicalFavourService.getMedicalServiceById(id);
 
         if (!service) {
-            throw new CustomError('Such service is not present', ResponseStatusCodes.NOT_FOUND, 'getMedicalServiceById')
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_MEDICAL_SERVICE_IS_NOT_PRESENT.message,
+                CustomErrorData.FORBIDDEN_MEDICAL_SERVICE_IS_NOT_PRESENT.code,
+            )
         }
 
         res.json(service)
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.FORBIDDEN)
-            .json({
-                message: e.message,
-                controller: e.controller || "getMedicalServiceById"
-            })
+        next(new CustomError(e))
+
     }
 
 }

@@ -8,7 +8,7 @@ const {medicalFavourService} = require('../../services');
 const {medicalServiceValidator} = require('../../validators');
 const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res,next) => {
     try {
         const newService = req.body;
         const [photo] = req.photos;
@@ -38,11 +38,7 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.FORBIDDEN)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 }

@@ -2,11 +2,17 @@ const jwt = require('jsonwebtoken');
 
 const {ResponseStatusCodes} = require('../constant');
 const {JWT_SECRET_REFRESH} = require('../config/configs');
-const CustomError = require('../error/CustomError');
+const {CustomError, CustomErrorData} = require('../error');
 
 module.exports = token => {
 
     jwt.verify(token, JWT_SECRET_REFRESH, err => {
-        if (err) throw new CustomError('Token is not valid :(', ResponseStatusCodes.FORBIDDEN, 'verifyRefreshToken')
+        if (err) {
+            throw new CustomError(
+                ResponseStatusCodes.UNAUTHORIZED,
+                CustomErrorData.UNAUTHORIZED_BAD_TOKEN.message,
+                CustomErrorData.UNAUTHORIZED_BAD_TOKEN.code,
+            )
+        }
     })
 };

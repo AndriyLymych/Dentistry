@@ -1,12 +1,10 @@
-const {ResponseStatusCodes} = require('../../constant');
 const {userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
+
     try {
         let users = [];
         const {name = ''} = req.query;
-
 
         if (!name) {
             users = await userService.getAllUsers()
@@ -19,11 +17,7 @@ module.exports = async (req, res) => {
         res.json(users);
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.NOT_FOUND)
-            .json({
-                message: e.message,
-                controller: e.controller || "Get all users"
-            })
+        next(new CustomError(e))
+
     }
 };

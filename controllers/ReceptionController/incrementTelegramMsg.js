@@ -1,7 +1,7 @@
 const {ResponseStatusCodes} = require('../../constant');
 const {receptionService} = require('../../services');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {chat_id} = req.query;
 
@@ -10,11 +10,6 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller || 'receptionPatient'
-            })
+        next(new CustomError(e))
     }
 };

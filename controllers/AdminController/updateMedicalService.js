@@ -1,32 +1,30 @@
-const fs = require('fs-extra');
-const {resolve} = require('path');
-
-const {CustomErrorData, CustomError} = require('../../error');
 const {medicalFavourService} = require('../../services');
 const {ResponseStatusCodes} = require('../../constant');
+const {CustomError,CustomErrorData} =require('../../error');
 
 module.exports = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const appRoot = global.appRoot;
-        const photoDir = `medicalService/${id}`;
+        const newService = req.body;
 
-        const service = await medicalFavourService.getMedicalServiceById(id);
+        const isServicePresent = await medicalFavourService.getMedicalServiceById(id);
 
-        if (!service) {
+        if (!isServicePresent) {
             throw new CustomError(
                 ResponseStatusCodes.FORBIDDEN,
                 CustomErrorData.FORBIDDEN_MEDICAL_SERVICE_IS_NOT_PRESENT.message,
                 CustomErrorData.FORBIDDEN_MEDICAL_SERVICE_IS_NOT_PRESENT.code,
             )
         }
-        await fs.removeSync(resolve(appRoot, 'public', photoDir));
+        await medicalFavourService.updateMedicalService({
+            service: newService.service,
+            description: newService.description,
+            price: newService.price
+        }, id);
 
-        await medicalFavourService.deleteMedicalService({id});
-
-        res.end();
-
+        res.status(ResponseStatusCodes.CREATED).json()
     } catch (e) {
+
         next(new CustomError(e))
 
     }

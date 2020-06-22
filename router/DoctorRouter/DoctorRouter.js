@@ -12,7 +12,7 @@ const {
     }
 } = require('../../middlewares');
 
-router.get('/specialities',doctorController.getAllSpecialities)
+router.get('/specialities',doctorController.getAllSpecialities);
 router.put(
     '/update-avatar',
     accessTokenChecker,

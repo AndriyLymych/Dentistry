@@ -1,7 +1,6 @@
-const {ResponseStatusCodes} = require('../../constant');
-const {commentService, userService} = require('../../services');
+const {commentService} = require('../../services');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         let filteredObj = {};
         const {doctor_id} = req.params;
@@ -25,11 +24,7 @@ module.exports = async (req, res) => {
         res.json(filteredObj)
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.NOT_FOUND)
-            .json({
-                message: e.message,
-                controller: e.controller || "getAllComments"
-            })
+        next(new CustomError(e))
+
     }
 };

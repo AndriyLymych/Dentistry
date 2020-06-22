@@ -1,9 +1,9 @@
 const {ResponseStatusCodes, USER_ROLE} = require('../../constant');
 const {queryParser} = require('../../helpers');
 const {receptionService, userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const {user_id: id} = req.user;
         const parsedQuery = queryParser(req.query);
@@ -11,7 +11,11 @@ module.exports = async (req, res) => {
         const isUserPresent = await userService.getUserById(id);
 
         if (!isUserPresent || isUserPresent.role_id !== USER_ROLE.DOCTOR) {
-            throw new CustomError('Wrong user', ResponseStatusCodes.FORBIDDEN, 'get all reception records')
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_YOU_ARE_NOT_DOCTOR.message,
+                CustomErrorData.BAD_REQUEST_YOU_ARE_NOT_DOCTOR.code,
+            )
         }
 
         const records = await receptionService.getAllReceptionRecords(parsedQuery);
@@ -19,11 +23,7 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).json(records);
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.NOT_FOUND)
-            .json({
-                message: e.message,
-                controller: e.controller || "Get all reception records"
-            })
+        next(new CustomError(e))
+
     }
 };

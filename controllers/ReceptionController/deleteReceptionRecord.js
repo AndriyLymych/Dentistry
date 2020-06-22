@@ -1,8 +1,8 @@
 const {ResponseStatusCodes} = require('../../constant');
 const {receptionService, userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
 
         const {user_id} = req.user;
@@ -11,7 +11,11 @@ module.exports = async (req, res) => {
         const isRecordPresent = await receptionService.getReceptionRecordByParams({id, email});
 
         if (!isRecordPresent) {
-            throw new CustomError('No such record')
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_RECORD_NOT_PRESENT.message,
+                CustomErrorData.FORBIDDEN_RECORD_NOT_PRESENT.code,
+            )
         }
 
         await receptionService.deleteReceptionRecord(id, email);
@@ -19,11 +23,7 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end();
 
     } catch (e) {
-        res
-            .status(ResponseStatusCodes.NOT_FOUND)
-            .json({
-                message: e.message,
-                controller: e.controller || "delete reception record "
-            })
+        next(new CustomError(e))
+
     }
 };

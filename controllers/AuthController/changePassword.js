@@ -1,9 +1,9 @@
 const {userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 const {ResponseStatusCodes} = require('../../constant');
 const {passwordHasher, passwordChecker} = require('../../helpers');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
 
         const {password, newPassword, newPasswordAgain} = req.body;
@@ -15,7 +15,11 @@ module.exports = async (req, res) => {
 
         if (newPassword !== newPasswordAgain) {
 
-            throw new CustomError('Passwords do not match', ResponseStatusCodes.FORBIDDEN, 'changePassword')
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_PASSWORDS_NOT_MATCH.message,
+                CustomErrorData.FORBIDDEN_PASSWORDS_NOT_MATCH.code,
+            )
         }
 
         const hashPass = await passwordHasher(newPassword);
@@ -24,11 +28,7 @@ module.exports = async (req, res) => {
 
         res.status(ResponseStatusCodes.CREATED).end()
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 }

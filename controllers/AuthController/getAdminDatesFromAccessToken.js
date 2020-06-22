@@ -1,22 +1,26 @@
 const {userService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
+const {ResponseStatusCodes} = require('../../constant');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
-        const {user_id:id}= req.user;
+        const {user_id: id} = req.user;
 
         const user = await userService.getUserInfoFromAccessToken(id);
 
-        if (!user) throw new CustomError('Such user is not present');
+        if (!user) {
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+            )
+        }
 
         res.json(user);
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller || "getUserFromAccessTokenController"
-            })
+
+        next(new CustomError(e))
+
     }
 }

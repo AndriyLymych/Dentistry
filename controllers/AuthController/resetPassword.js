@@ -1,29 +1,40 @@
 const Joi = require('joi');
 
 const {userService, authService} = require('../../services');
-const CustomError = require('../../error/CustomError');
+const {CustomError, CustomErrorData} = require('../../error');
 const {ResponseStatusCodes} = require('../../constant');
 const {changePasswordValidator} = require('../../validators');
 const {passwordHasher} = require('../../helpers');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
-        const {token:action_token} = req.params;
-        console.log(action_token);
+        const {token: action_token} = req.params;
         const password = req.body;
+
         if (!action_token) {
-            throw new CustomError('Token is not present', ResponseStatusCodes.FORBIDDEN, 'resetPassword');
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_NO_TOKEN.message,
+                CustomErrorData.BAD_REQUEST_NO_TOKEN.code,
+            )
         }
 
         const tokenFromDB = await authService.getUserAndTokenForResetPassword({action_token});
 
         if (!tokenFromDB) {
-            throw new CustomError('Wrong token', ResponseStatusCodes.FORBIDDEN, 'resetPassword');
-
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_WRONG_ACTION_TOKEN.message,
+                CustomErrorData.FORBIDDEN_WRONG_ACTION_TOKEN.code,
+            )
         }
 
         if (password.newPassword !== password.newPasswordAgain) {
-            throw new CustomError('Passwords do not match', ResponseStatusCodes.FORBIDDEN, 'changePassword')
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN,
+                CustomErrorData.FORBIDDEN_PASSWORDS_NOT_MATCH.message,
+                CustomErrorData.FORBIDDEN_PASSWORDS_NOT_MATCH.code,
+            )
         }
 
         const validatedPassword = Joi.validate(password, changePasswordValidator);
@@ -40,11 +51,7 @@ module.exports = async (req, res) => {
 
         res.status(ResponseStatusCodes.CREATED).end()
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller
-            })
+        next(new CustomError(e))
+
     }
 }

@@ -5,10 +5,10 @@ const {receptionValidator} = require('../../validators');
 const {userService} = require('../../services');
 const CustomError = require('../../error/CustomError');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const reception = req.body;
-        reception.count_mail  = 0;
+        reception.count_mail = 0;
 
         const validatedReception = Joi.validate(reception, receptionValidator);
 
@@ -23,11 +23,7 @@ module.exports = async (req, res) => {
         res.status(ResponseStatusCodes.CREATED).end()
 
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller || 'receptionPatient'
-            })
+        next(new CustomError(e))
+
     }
 }

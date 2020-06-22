@@ -2,7 +2,7 @@ const {oauthService} = require('../../services');
 const {tokenCreator} = require('../../helpers');
 const {ResponseStatusCodes} = require('../../constant');
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const refresh_token = req.get('Authorization');
 
@@ -19,11 +19,7 @@ module.exports = async (req, res) => {
 
         res.status(ResponseStatusCodes.CREATED).end()
     } catch (e) {
-        res
-            .status(e.status)
-            .json({
-                message: e.message,
-                controller: e.controller || "refreshToken"
-            })
+        next(new CustomError(e))
+
     }
 }
