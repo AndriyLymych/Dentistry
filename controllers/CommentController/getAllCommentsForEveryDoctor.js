@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
         res.json(filteredObj)
 
     } catch (e) {
-        next(new CustomError(e))
+        next(new CustomError(e.status, e.message, e.code))
 
     }
 };

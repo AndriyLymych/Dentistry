@@ -1,14 +1,17 @@
 module.exports = class CustomError extends Error {
+    status;
+    message;
+    code;
+
     constructor(
-        message,
         status = 500,
-        controller = 'Controller is not defined (:',
-        code=undefined
+        message,
+        code = undefined
     ) {
-        super(message);
+        super();
         this.status = status;
-        this.code=code;
-        this.controller = controller;
+        this.message = message;
+        this.code = code;
         Error.captureStackTrace(this, this.constructor)
     }
 };

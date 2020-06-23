@@ -47,14 +47,13 @@ app.use('/users', UserRouter);
 
 
 app.use((err, req, res, next) => {
-    console.log(err);
+
     res
         .status(err.status || ResponseStatusCodes.SERVER_ERROR)
         .json({
+            status: err.status,
             message: err.message || 'Unknown Error',
-            code: err.code,
-            data: err.data,
-            controller: err.controller
+            code: err.code
 
         });
 });

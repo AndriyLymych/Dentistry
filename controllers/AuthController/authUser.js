@@ -20,7 +20,8 @@ module.exports = async (req, res, next) => {
         }
 
         if (!userPresent) {
-            throw new CustomError(
+
+            throw  new CustomError(
                 ResponseStatusCodes.BAD_REQUEST,
                 CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
                 CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
@@ -46,7 +47,7 @@ module.exports = async (req, res, next) => {
         res.json(tokens);
 
     } catch (e) {
-        next(new CustomError(e))
+        next(new CustomError(e.status, e.message, e.code))
 
     }
 }

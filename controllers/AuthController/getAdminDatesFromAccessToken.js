@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
     } catch (e) {
 
-        next(new CustomError(e))
+        next(new CustomError(e.status, e.message, e.code))
 
     }
 }

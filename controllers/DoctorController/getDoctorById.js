@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
         res.status(ResponseStatusCodes.CREATED).json(doctor)
 
     } catch (e) {
-        next(new CustomError(e))
+        next(new CustomError(e.status, e.message, e.code))
 
     }
 };
