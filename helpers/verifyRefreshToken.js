@@ -1,18 +1,22 @@
 const jwt = require('jsonwebtoken');
+const {promisify} = require('util');
 
 const {ResponseStatusCodes} = require('../constant');
 const {JWT_SECRET_REFRESH} = require('../config/configs');
 const {CustomError, CustomErrorData} = require('../error');
 
-module.exports = token => {
+const verify = promisify(jwt.verify);
 
-    jwt.verify(token, JWT_SECRET_REFRESH, err => {
-        if (err) {
-            throw new CustomError(
-                ResponseStatusCodes.UNAUTHORIZED,
-                CustomErrorData.UNAUTHORIZED_BAD_TOKEN.message,
-                CustomErrorData.UNAUTHORIZED_BAD_TOKEN.code,
-            )
-        }
-    })
+module.exports = async (token) => {
+
+    try {
+        await verify(token, JWT_SECRET_REFRESH)
+    } catch {
+        throw   new CustomError(
+            ResponseStatusCodes.UNAUTHORIZED,
+            CustomErrorData.UNAUTHORIZED_BAD_REFRESH_TOKEN.message,
+            CustomErrorData.UNAUTHORIZED_BAD_REFRESH_TOKEN.code,
+        )
+
+    }
 };

@@ -10,7 +10,7 @@ router.get(
     authController.getUserFromAccessToken
 );
 router.post('/', authController.authUser);
-router.post('/logout', authMiddleware.accessTokenChecker, authController.logoutUser);
+router.post('/logout', authController.logoutUser);
 router.post(
     '/refresh',
     authMiddleware.refreshTokenChecker,

@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
 
         const doctor = req.body;
         const {email} = doctor;
+
         const isEmailPresent = await userService.getUserByParams({email});
 
         if (isEmailPresent) {
@@ -27,14 +28,14 @@ module.exports = async (req, res, next) => {
         const validatedDoctor = Joi.validate(doctor, userValidator);
 
         if (validatedDoctor.error) {
-            throw new CustomError(validatedDoctor.error.details[0].message, 400, 'Create Patient');
+            throw new CustomError(ResponseStatusCodes.FORBIDDEN, validatedDoctor.error.details[0].message);
         }
 
         doctor.password = await passwordHasher(doctor.password);
 
         await userService.createUser(doctor);
 
-        await emailService.sendEmailForRegister(doctor.email, doctor.name, doctor.middleName);
+        // await emailService.sendEmailForRegister(doctor.email, doctor.name, doctor.middleName);
 
         res.status(ResponseStatusCodes.CREATED).end();
 

@@ -5,7 +5,8 @@ const {
         updateUserProfile,
         evaluateDoctor,
         getIsEvaluateForUser,
-        getAllUsers,
+        getAllActiveUsers,
+        getAllBlockedUsers,
         getAverageMark
     }
 } = require('../../controllers');
@@ -43,8 +44,12 @@ router.get(
 );
 
 router.get(
-    '/',
-    getAllUsers
+    '/active',
+    getAllActiveUsers
+);
+router.get(
+    '/blocked',
+    getAllBlockedUsers
 );
 
 

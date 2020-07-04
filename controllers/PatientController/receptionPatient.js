@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
 
         if (validatedReception.error) {
             throw new CustomError(
-                validatedReception.error.details[0].message, ResponseStatusCodes.BAD_REQUEST, 'receptionPatient'
+                ResponseStatusCodes.FORBIDDEN, validatedReception.error.details[0].message
             );
         }
 

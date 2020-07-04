@@ -50,6 +50,10 @@ module.exports = {
         message: 'You are not a admin',
         code: 40010
     },
+    BAD_REQUEST_WRONG_EMAIL: {
+        message: 'Wrong email',
+        code: 40011
+    },
 
 
     //401 error code
@@ -57,10 +61,20 @@ module.exports = {
         message: 'User is not authorized',
         code: 4011
     },
-
-    UNAUTHORIZED_BAD_TOKEN: {
-        message: 'Token is not valid',
+    //+
+    UNAUTHORIZED_BAD_ACCESS_TOKEN: {
+        message: 'Access token is not valid',
         code: 4012
+    },
+    //+
+    UNAUTHORIZED_BAD_REFRESH_TOKEN: {
+        message: 'Refresh token is not valid',
+        code: 4013
+    },
+    //+
+    UNAUTHORIZED_BAD_TOKEN: {
+        message: 'Action token is not valid',
+        code: 4014
     },
 
 
@@ -101,7 +115,7 @@ module.exports = {
     FORBIDDEN_PHOTO_NOT_PRESENT: {
         message: 'Photo is not present',
         code: 4037
-    } ,
+    },
     //+
     FORBIDDEN_PHOTO_BIG_SIZE: {
         message: 'Photo size is more then 5mb',

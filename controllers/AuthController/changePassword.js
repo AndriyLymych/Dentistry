@@ -1,7 +1,10 @@
+const Joi = require('joi');
+
 const {userService} = require('../../services');
 const {CustomError, CustomErrorData} = require('../../error');
 const {ResponseStatusCodes} = require('../../constant');
 const {passwordHasher, passwordChecker} = require('../../helpers');
+const {changePasswordValidator} = require('../../validators');
 
 module.exports = async (req, res, next) => {
     try {
@@ -9,6 +12,26 @@ module.exports = async (req, res, next) => {
         const {password, newPassword, newPasswordAgain} = req.body;
         const {user_id: id} = req.user;
 
+        const userPresent = await userService.getUserByParams(
+            {password}
+        );
+
+        if (!userPresent){
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.message,
+                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.code,
+            )
+        }
+
+        const validatedPasswordData = Joi.validate({password, newPassword, newPasswordAgain}, changePasswordValidator);
+
+        if (validatedPasswordData.error) {
+
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN, validatedPasswordData.error.details[0].message
+            );
+        }
         const user = await userService.getUserById(id);
 
         await passwordChecker(user.password, password);

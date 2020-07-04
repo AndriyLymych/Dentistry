@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
         const editedComment = Joi.validate(newComment, commentValidator);
 
         if (editedComment.error) {
-            throw new CustomError(editedComment.error.details[0].message, 400, 'editComment');
+            throw new CustomError(ResponseStatusCodes.FORBIDDEN, editedComment.error.details[0].message);
         }
 
         await commentService.updateComment(newComment, id);

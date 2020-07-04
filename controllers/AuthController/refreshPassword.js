@@ -13,8 +13,8 @@ module.exports = async (req, res, next) => {
         if (!userPresent) {
             throw new CustomError(
                 ResponseStatusCodes.BAD_REQUEST,
-                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
-                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.message,
+                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.code,
             )
         };
 

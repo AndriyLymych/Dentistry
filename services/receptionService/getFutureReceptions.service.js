@@ -10,7 +10,7 @@ module.exports = () => {
         where: {
             count_mail: 0,
             date: {
-                [Op.gte]: literal('NOW() - INTERVAL 1 DAY') // TODO need to fix in future
+                [Op.gte]: literal('NOW() - INTERVAL 1 DAY')
             }
         },
         raw: true

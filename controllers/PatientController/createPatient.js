@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
     try {
         const patient = req.body;
         const {email} = patient;
+
         const isPatientEmailPresent = await userService.getUserByParams({email});
 
         if (isPatientEmailPresent) {
@@ -26,13 +27,12 @@ module.exports = async (req, res, next) => {
         const validatedPatient = Joi.validate(patient, userValidator);
 
         if (validatedPatient.error) {
-            throw new CustomError(validatedPatient.error.details[0].message, 400, 'Create Patient');
+            throw new CustomError(ResponseStatusCodes.FORBIDDEN, validatedPatient.error.details[0].message);
         }
 
         patient.password = await passwordHasher(patient.password);
 
         await userService.createUser(patient);
-        console.log(patient.email);
 
         await emailService.sendEmailForRegister(patient.email, patient.name, patient.middleName);
 

@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
         if (validatedDoctorMark.error) {
 
-            throw new CustomError(validatedDoctorMark.error.details[0].message, 400, 'evaluate doctor');
+            throw new CustomError(ResponseStatusCodes.FORBIDDEN, validatedDoctorMark.error.details[0].message);
         }
 
         await doctorRatingService.setDoctorMark(evaluatedData);

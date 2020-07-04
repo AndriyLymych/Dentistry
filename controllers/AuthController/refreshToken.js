@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
             ...newTokens
         });
 
-        res.status(ResponseStatusCodes.CREATED).end()
+        res.status(ResponseStatusCodes.CREATED).json(newTokens)
     } catch (e) {
         next(new CustomError(e.status, e.message, e.code))
 

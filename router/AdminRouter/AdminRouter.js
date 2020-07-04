@@ -56,16 +56,14 @@ router.post(
     authMiddleware.getUserFromRefreshToken,
     authController.refreshToken
 );
-router.use(
-    '/users/:id',
-    authMiddleware.accessTokenChecker,
+
+router.put('/users/:id/block', authMiddleware.accessTokenChecker,
     authMiddleware.getAdminFromAccessToken,
-    userMiddleware.userPresent
-);
+    userMiddleware.userPresent, adminController.blockUser);
 
-router.put('/users/:id/block', adminController.blockUser);
-
-router.put('/users/:id/unblock', adminController.unblockUser);
+router.put('/users/:id/unblock', authMiddleware.accessTokenChecker,
+    authMiddleware.getAdminFromAccessToken,
+    userMiddleware.userPresent, adminController.unblockUser);
 
 
 router.get(

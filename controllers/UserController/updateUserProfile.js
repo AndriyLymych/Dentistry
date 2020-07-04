@@ -2,19 +2,19 @@ const Joi = require('joi');
 
 const CustomError = require('../../error/CustomError');
 const {updateUserValidator} = require('../../validators');
-const {userService}= require('../../services');
+const {userService} = require('../../services');
 const {ResponseStatusCodes} = require('../../constant');
 
 module.exports = async (req, res, next) => {
     try {
         const updatedUser = req.body;
 
-        const {user_id:id} = req.user;
+        const {user_id: id} = req.user;
 
         const validatedUpdatedUser = Joi.validate(updatedUser, updateUserValidator);
 
         if (validatedUpdatedUser.error) {
-            throw new CustomError(validatedUpdatedUser.error.details[0].message, 400, 'Update user profile');
+            throw new CustomError(ResponseStatusCodes.FORBIDDEN, validatedUpdatedUser.error.details[0].message);
         }
 
         await userService.updateUserByParams({

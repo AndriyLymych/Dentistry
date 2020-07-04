@@ -13,7 +13,8 @@ module.exports = async (req, res, next) => {
                 CustomErrorData.BAD_REQUEST_COMMENT_NOT_PRESENT.message,
                 CustomErrorData.BAD_REQUEST_COMMENT_NOT_PRESENT.code,
             )
-        };
+        }
+
         await commentService.deleteComment({id});
 
         res.status(ResponseStatusCodes.CREATED).end();

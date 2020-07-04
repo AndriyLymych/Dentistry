@@ -1,7 +1,10 @@
+const Joi = require('joi');
+
 const {userService, oauthService} = require('../../services');
 const {USER_STATUS, USER_ROLE, ResponseStatusCodes} = require('../../constant');
 const {tokenCreator, passwordChecker} = require('../../helpers');
 const {CustomError, CustomErrorData} = require('../../error');
+const {authValidator} = require('../../validators');
 
 module.exports = async (req, res, next) => {
     try {
@@ -34,6 +37,15 @@ module.exports = async (req, res, next) => {
                 CustomErrorData.FORBIDDEN_USER_IS_BLOCKED.message,
                 CustomErrorData.FORBIDDEN_USER_IS_BLOCKED.code,
             )
+        }
+
+        const validatedAuth = Joi.validate({email, password}, authValidator);
+
+        if (validatedAuth.error) {
+
+            throw new CustomError(
+                ResponseStatusCodes.FORBIDDEN, validatedAuth.error.details[0].message
+            );
         }
         await passwordChecker(userPresent.password, password);
 
