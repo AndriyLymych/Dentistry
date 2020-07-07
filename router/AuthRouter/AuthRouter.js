@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const passport = require('passport');
 
 const {authController} = require('../../controllers');
 const {authMiddleware} = require('../../middlewares');
@@ -33,5 +34,16 @@ router.put(
     authMiddleware.getUserFromAccessToken,
     authController.changePassword
 );
+router.get('/google', passport.authenticate("google", {scope: ['profile', 'email']}));
+
+router.get('/google/callback', passport.authenticate('google', {
+    session: false
+}), authController.authWithGoogle);
+
+router.get('/facebook', passport.authenticate("facebook", {scope: ['email']}));
+
+router.get('/facebook/callback', passport.authenticate('facebook', {
+    session: false
+}), authController.authWithFacebook);
 
 module.exports = router;

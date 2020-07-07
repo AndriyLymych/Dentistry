@@ -3,8 +3,10 @@ const {resolve} = require('path');
 const fileUploader = require('express-fileupload');
 const morgan = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
 
 require('./dataBase').getInstance().setModels();
+
 const {
     PatientRouter,
     DoctorRouter,
@@ -25,6 +27,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(cors());
+app.use(passport.initialize({}));
 
 app.use(fileUploader({}));
 app.use(express.urlencoded({extended: true}));
@@ -33,6 +36,8 @@ app.use(express.json());
 app.use(express.static(resolve(__dirname, 'public')));
 global.appRoot = __dirname;
 
+require('./helpers/googleStrategy');
+require('./helpers/facebookStrategy');
 
 app.use('/patients', PatientRouter);
 app.use('/doctors', DoctorRouter);

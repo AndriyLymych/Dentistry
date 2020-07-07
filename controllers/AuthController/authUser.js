@@ -13,15 +13,6 @@ module.exports = async (req, res, next) => {
         const userPresent = await userService.getUserByParams({
             email
         });
-
-        if (userPresent.role_id !== USER_ROLE.PATIENT && userPresent.role_id !== USER_ROLE.DOCTOR) {
-            throw new CustomError(
-                ResponseStatusCodes.BAD_REQUEST,
-                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
-                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
-            )
-        }
-
         if (!userPresent) {
 
             throw  new CustomError(
@@ -30,6 +21,15 @@ module.exports = async (req, res, next) => {
                 CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
             )
         }
+        if (userPresent.role_id !== USER_ROLE.PATIENT && userPresent.role_id !== USER_ROLE.DOCTOR) {
+            throw new CustomError(
+                ResponseStatusCodes.BAD_REQUEST,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
+                CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+            )
+        }
+
+
 
         if (userPresent.status_id === USER_STATUS.BLOCKED) {
             throw new CustomError(

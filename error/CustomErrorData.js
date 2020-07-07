@@ -54,6 +54,14 @@ module.exports = {
         message: 'Wrong email',
         code: 40011
     },
+    BAD_REQUEST_GOOGLE_AUTH: {
+        message: 'Google auth error',
+        code: 40012
+    },
+    BAD_REQUEST_FACEBOOK_AUTH: {
+        message: 'Facebook auth error',
+        code: 40013
+    },
 
 
     //401 error code

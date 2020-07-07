@@ -8,6 +8,8 @@ module.exports.resetPasswordTemplate = require('./resetPasswordTemplate');
 module.exports.tokenCreatorForResetPassword = require('./tokenCreatorForResetPassword');
 module.exports.mailerTransport = require('./mailerTransport');
 module.exports.queryParser = require('./queryParser');
+module.exports.googleStrategy = require('./googleStrategy');
+module.exports.facebookStrategy = require('./facebookStrategy');
 
 
 

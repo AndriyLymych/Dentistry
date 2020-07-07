@@ -7,5 +7,7 @@ module.exports.changePassword = require('./changePassword');
 module.exports.resetPassword = require('./resetPassword');
 module.exports.getUserFromAccessToken = require('./getUserFromAccessToken');
 module.exports.getAdminDatesFromAccessToken = require('./getAdminDatesFromAccessToken');
+module.exports.authWithGoogle = require('./authWithGoogle');
+module.exports.authWithFacebook = require('./authWithFacebook');
 
 
