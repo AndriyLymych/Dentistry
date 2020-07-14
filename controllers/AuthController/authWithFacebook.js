@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
         console.log('face');
         let tokenPair = [];
         const userFromFacebook = req.user._json;
-        console.log(userFromFacebook);
+        // console.log(userFromFacebook);
         const {first_name: name, last_name: surname, email} = userFromFacebook;
 
         if (!userFromFacebook) {
