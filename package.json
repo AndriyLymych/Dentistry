@@ -19,7 +19,7 @@
     "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.7",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6",
+    "express-fileupload": "^1.1.9",
     "fs-extra": "^8.1.0",
     "global": "^4.4.0",
     "joi": "^14.3.1",
