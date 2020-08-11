@@ -62,6 +62,10 @@ module.exports = {
         message: 'Facebook auth error',
         code: 40013
     },
+    BAD_REQUEST_WRONG_PASSWORD: {
+        message: 'Wrong password',
+        code: 40014
+    },
 
 
     //401 error code

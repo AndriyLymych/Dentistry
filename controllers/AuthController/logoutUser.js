@@ -5,6 +5,7 @@ const {CustomError,CustomErrorData} = require('../../error');
 module.exports = async (req, res, next) => {
     try {
         const token = req.get('Authorization');
+
         if (!token) {
             return next(new CustomError(
                 ResponseStatusCodes.UNAUTHORIZED,

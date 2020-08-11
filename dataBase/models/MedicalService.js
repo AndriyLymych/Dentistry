@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         price: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        small_description: {
+            type: DataTypes.TEXT,
+            allowNull: false
         }
     }, {
         tableName: MEDICAL_SERVICE,

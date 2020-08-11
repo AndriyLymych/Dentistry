@@ -12,17 +12,9 @@ module.exports = async (req, res, next) => {
         const {password, newPassword, newPasswordAgain} = req.body;
         const {user_id: id} = req.user;
 
-        const userPresent = await userService.getUserByParams(
-            {password}
-        );
+        const user = await userService.getUserById(id);
 
-        if (!userPresent){
-            throw new CustomError(
-                ResponseStatusCodes.BAD_REQUEST,
-                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.message,
-                CustomErrorData.BAD_REQUEST_WRONG_EMAIL.code,
-            )
-        }
+        await passwordChecker(user.password, password);
 
         const validatedPasswordData = Joi.validate({password, newPassword, newPasswordAgain}, changePasswordValidator);
 
@@ -32,9 +24,7 @@ module.exports = async (req, res, next) => {
                 ResponseStatusCodes.FORBIDDEN, validatedPasswordData.error.details[0].message
             );
         }
-        const user = await userService.getUserById(id);
 
-        await passwordChecker(user.password, password);
 
         if (newPassword !== newPasswordAgain) {
 

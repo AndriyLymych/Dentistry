@@ -44,7 +44,12 @@ module.exports = {
                 price: {
                     type: Sequelize.INTEGER,
                     allowNull: false
+                },
+                small_description: {
+                    type: Sequelize.TEXT,
+                    allowNull: false
                 }
+
             };
 
             await queryInterface.createTable(MEDICAL_SERVICE, medicalService);
@@ -199,6 +204,14 @@ module.exports = {
                     },
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
+                },
+                experience: {
+                    type: Sequelize.INTEGER,
+                    allowNull: true
+                },
+                room: {
+                    type: Sequelize.INTEGER,
+                    allowNull: true
                 }
             };
 

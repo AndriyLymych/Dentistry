@@ -1,2 +1,2 @@
-module.exports.PASSWORD = '123';
-module.exports.EMAIL = 'somemail@gmail.com';
+module.exports.EMAIL = 'lymych1994@gmail.com';
+module.exports.PASSWORD = '2000maxat';

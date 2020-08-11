@@ -70,6 +70,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             foreignKey: true,
             allowNull: false
+        },
+        experience:{
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        room:{
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     }, {
         tableName: USER,

@@ -10,8 +10,8 @@ module.exports = async (hashedPassword, password) => {
     if (!checkedPassword) {
         throw new CustomError(
             ResponseStatusCodes.BAD_REQUEST,
-            CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.message,
-            CustomErrorData.BAD_REQUEST_USER_NOT_PRESENT.code,
+            CustomErrorData.BAD_REQUEST_WRONG_PASSWORD.message,
+            CustomErrorData.BAD_REQUEST_WRONG_PASSWORD.code,
         )
     }
 }

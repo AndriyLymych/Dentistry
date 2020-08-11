@@ -7,7 +7,7 @@ const {CustomError, CustomErrorData} = require('../error');
 
 const verify = promisify(jwt.verify);
 
-module.exports = async (token) => {
+module.exports = async token => {
 
     try {
         await verify(token, JWT_SECRET_REFRESH)

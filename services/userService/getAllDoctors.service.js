@@ -9,7 +9,7 @@ module.exports = async obj => {
     const doctors = await UserModel.findAll({
         where: obj,
         include: [{
-            model:UserSpecialityModel,
+            model: UserSpecialityModel,
             attributes: ['label']
         }]
     });

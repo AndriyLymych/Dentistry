@@ -12,7 +12,7 @@ module.exports = async (token) => {
     try {
         await verify(token, JWT_SECRET_ACCESS)
     } catch {
-        throw   new CustomError(
+        throw  new CustomError(
             ResponseStatusCodes.UNAUTHORIZED,
             CustomErrorData.UNAUTHORIZED_BAD_ACCESS_TOKEN.message,
             CustomErrorData.UNAUTHORIZED_BAD_ACCESS_TOKEN.code,
