@@ -12,7 +12,6 @@ module.exports = () => {
         }
     });
 
-    return {
-        transport
-    }
+    return transport
+
 };

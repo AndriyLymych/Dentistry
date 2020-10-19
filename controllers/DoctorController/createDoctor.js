@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
 
         const doctor = req.body;
         const {email} = doctor;
+        
 
         const isEmailPresent = await userService.getUserByParams({email});
 
