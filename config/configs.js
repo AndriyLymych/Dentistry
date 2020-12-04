@@ -3,8 +3,8 @@ module.exports = {
     PORT: process.env.PORT || 5000,
 
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ||
-        '426897079068-knie738h207bd6sj4biq8129iem19kvf.apps.googleusercontent.com',
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || '024riJXe_qe9rtI99idsfWFZ',
+        'gffxfxhhghgchghgcghhcghcg',
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || '67755756756gdhdhhdt',
 
     FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID || '3295493364010175',
     FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET || '7f689bad538ef3634930749ad415a5af',
